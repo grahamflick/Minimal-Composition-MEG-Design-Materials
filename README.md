@@ -1,5 +1,4 @@
-# Bemis &amp; Pylkkanen 2011 minimal composition procedure.
-
+# Bemis &amp; Pylkkanen 2011
 Bemis, D. K., & Pylkkänen, L. (2011). Simple composition: A magnetoencephalography investigation into the comprehension of minimal linguistic phrases. Journal of Neuroscience, 31(8), 2801-2814.
 
 # Outline of this repository:
