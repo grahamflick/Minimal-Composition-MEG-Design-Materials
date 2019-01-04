@@ -9,7 +9,7 @@ trial {
 trial {
   trial_duration = stimuli_length;
   trial_type = fixed;
-  picture {text asterisk; x = 0; y = 0;};
+  picture {text asterisk; x = 0; y = 0; };
   time = $jitter;
   duration = 300;
   picture $word1;
