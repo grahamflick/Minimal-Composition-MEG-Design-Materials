@@ -1,13 +1,18 @@
-# Tools for running the Bemis &amp; Pylkkanen 2011 minimal composition 'red boat' procedure.
+# Bemis &amp; Pylkkanen 2011 minimal composition ('red boat') procedure.
 
-# Outline: 
+Bemis, D. K., & Pylkkänen, L. (2011). Simple composition: A magnetoencephalography investigation into the comprehension of minimal linguistic phrases. Journal of Neuroscience, 31(8), 2801-2814.
+
+# Outline of this repository:
+This repo contains code and materials to run an experimental procedure that closely follows B & P 2011. The experiment is written in Presentation's SDL language, using a pair of python scripts to generate pseudo-random stimuli lists for a set of subjects. Experimental materials are located in redboat/Stim. 
+
+# Experiment Summary: See original paper for complete methods 
 Subjects performed two tasks, in alternating blocks: 
 
 In "Phrase" or "Composition" blocks, subjects read either a phrase made of a color adjective and noun (e.g. red boat) or a non-word and word combination (xyk boat). They then saw an image, and used a button press to indicate whether the image matches the single word or phrase.
 
 In "List" or "non-composition" blocks, subjects read either a list of two nouns (key, boat) or a non-word and word combination (xyk boat). They then saw an image, and used a button press to indicate whether the image matched either one of the two words (on 2 word trials) or the single word (on 1 word trials).
 
-# Experimental materials are located in redboat/stim
+# Experimental materials
 
 The language stimuli can be summarized as follows:
 
@@ -25,7 +30,7 @@ The current version of the experiment is run in Presentation (Neurobehavioral sy
 
 i. No list condition trial was allowed to be a noun repeated (e.g. cross, cross).
 
-ii. No 1st word item could appear with a single noun 
+ii. No 1st word item could appear with a single noun more than twice.
 
 # The current version of the experiment deviates from Bemis & Pylkkanen in the following ways:
 
