@@ -7,7 +7,9 @@ This repo contains code and materials to run an experimental procedure that clos
 # Outline of the Presentation Code:
 The experimental code uses "Template" files to present trials. The primary template file is "MainTrial_Phrase.tem". This contains the definition of a single trial, used in every condition. The $ items are read in from each subject's "Scenario" file. Scenario files are generated using the python scripts included here. To modify the timing parameters of the trials, one needs only change the ".tem" files. To modify instructions or stimuli, one can modify either the individual subjects' Scenario files, or the python scripts used to generate them. 
 
-# Experiment Summary: See original paper for complete methods 
+# Experiment Summary
+See original paper for complete methods.
+
 Subjects performed two tasks, in alternating blocks: 
 
 In "Phrase" or "Composition" blocks, subjects read either a phrase made of a color adjective and noun (e.g. red boat) or a non-word and word combination (xyk boat). They then saw an image, and used a button press to indicate whether the image matches the single word or phrase.
