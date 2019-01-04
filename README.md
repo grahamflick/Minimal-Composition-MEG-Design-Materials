@@ -32,7 +32,7 @@ i. No list condition trial was allowed to be a noun repeated (e.g. cross, cross)
 
 ii. No 1st word item could appear with a single noun more than twice.
 
-# The current version of the experiment deviates from Bemis & Pylkkanen in the following ways:
+# Deviations from Bemis & Pylkkanen 2011:
 
 1. For each subject, B & P selected set of 50 images that were repeated in each 1-word/2-word condition. Here, 200 unique images are pseudo-randomly selected for each subject, with the desired number of match/mismatch trials.
 
