@@ -3,7 +3,7 @@
 Bemis, D. K., & Pylkkänen, L. (2011). Simple composition: A magnetoencephalography investigation into the comprehension of minimal linguistic phrases. Journal of Neuroscience, 31(8), 2801-2814.
 
 # Outline of this repository:
-This repo contains code and materials to run an experimental procedure that closely follows B & P 2011. The experiment is written in Presentation's SDL language, using a pair of python scripts to generate pseudo-random stimuli lists for a set of subjects. Experimental materials are located in redboat/Stim. 
+This repo contains code and materials to run an experimental procedure that closely follows B & P 2011. The experiment is written in Presentation's SDL language, using a pair of python scripts to generate pseudo-random stimuli lists for a set of subjects. For an example of how to use these scripts, see example.py . Experimental materials are located in redboat/Stim. 
 
 # Experiment Summary: See original paper for complete methods 
 Subjects performed two tasks, in alternating blocks: 
