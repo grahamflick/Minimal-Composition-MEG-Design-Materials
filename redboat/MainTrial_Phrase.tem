@@ -1,0 +1,31 @@
+
+trial {
+  trial_duration = stimuli_length;
+  trial_type = fixed;
+  picture {text blank; x = 0; y = 0;};
+  time = 0;
+  duration = 100;};
+
+trial {
+  trial_duration = stimuli_length;
+  trial_type = fixed;
+  picture {text asterisk; x = 0; y = 0;};
+  time = $jitter;
+  duration = 300;
+  picture $word1;
+  duration = 300;
+  deltat = 300;
+  port_code = $Port_Code1;
+  picture $word2;
+  duration = 300;
+  port_code = $Port_Code2;
+  deltat=600;};
+
+trial {
+  trial_duration = stimuli_length;
+  trial_type = fixed;
+  picture { text blank; x = 0; y = 0;};
+  time = 0;
+  duration = 600;};
+
+trial {trial_type = first_response; trial_duration = forever;  picture {bitmap $picture1; x =0; y=0;}; time=0;};
