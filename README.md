@@ -61,7 +61,7 @@ ISI: 600 ms
 Image: Until subject response
 
 # Trigger scheme for MEG:
-2 triggers are sent on each trial, one for each item. A photodiode is presented in the top left corner to account for delays in post-processing.
+2 triggers are sent on each trial, one for each item. A photodiode is presented in the top right corner (not visible to subject) to account for delays in post-processing.
 
 List, on 1st item, non-word: 1
 
