@@ -6,24 +6,24 @@ def write_scenario_files(subject_idx, FirstBlock, MatchButton):
     subject_idx = subject_idx+1
 
     if FirstBlock == 'composition':
-      Block1 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_0' %subject_idx)
-      Block2 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_0' %subject_idx)
-      Block3 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_1' %subject_idx)
-      Block4 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_1' %subject_idx)
-      Block5 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_2' %subject_idx)
-      Block6 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_2' %subject_idx)
-      Block7 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_3' %subject_idx)
-      Block8 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_3' %subject_idx)
+      Block1 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_0' %subject_idx,sep=" ")
+      Block2 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_0' %subject_idx,sep=" ")
+      Block3 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_1' %subject_idx,sep=" ")
+      Block4 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_1' %subject_idx,sep=" ")
+      Block5 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_2' %subject_idx,sep=" ")
+      Block6 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_2' %subject_idx,sep=" ")
+      Block7 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_3' %subject_idx,sep=" ")
+      Block8 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_3' %subject_idx,sep=" ")
 
     if FirstBlock == 'list':
-      Block1 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_0' %subject_idx)
-      Block2 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_0' %subject_idx)
-      Block3 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_1' %subject_idx)
-      Block4 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_1' %subject_idx)
-      Block5 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_2' %subject_idx)
-      Block6 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_2' %subject_idx)
-      Block7 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_3' %subject_idx)
-      Block8 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_3' %subject_idx)
+      Block1 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_0' %subject_idx,sep=" ")
+      Block2 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_0' %subject_idx,sep=" ")
+      Block3 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_1' %subject_idx,sep=" ")
+      Block4 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_1' %subject_idx,sep=" ")
+      Block5 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_2' %subject_idx,sep=" ")
+      Block6 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_2' %subject_idx,sep=" ")
+      Block7 = pd.read_csv('redboat/SubjectLists/Subject_%s_List_Block_3' %subject_idx,sep=" ")
+      Block8 = pd.read_csv('redboat/SubjectLists/Subject_%s_Composition_Block_3' %subject_idx,sep=" ")
 
     Blocks = [Block1,Block2,Block3,Block4,Block5,Block6,Block7,Block8]
     if FirstBlock == 'composition':
@@ -57,7 +57,7 @@ def write_scenario_files(subject_idx, FirstBlock, MatchButton):
       df_tmp = Blocks[ii]
       insert = inserts[ii]
       for k in range(0,50):
-          data[insert+k] = df_tmp.values[k][0] + '\r\n'
+          data[insert+k] = str(df_tmp.values[k][0]) + ' ' + df_tmp.values[k][1] + ' ' + str(df_tmp.values[k][2]) + ' ' + df_tmp.values[k][3] + ' ' + df_tmp.values[k][4] + ' ' + str(df_tmp.values[k][5]) + ' ' + str(df_tmp.values[k][6]) + ' ' +  df_tmp.values[k][7] + '\r\n'
 
     # and write everything out:
     with open('redboat/ScenarioFiles/Subject_%s_Scenario_%s_%s.txt' %(subject_idx, FirstBlock, MatchButton),'w') as file2:

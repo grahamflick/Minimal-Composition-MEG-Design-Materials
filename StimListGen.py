@@ -254,6 +254,7 @@ def make_subject_stimlists(subject_idx):
         df_tmp = pd.DataFrame(jitters,columns=['jitter'])
         word1list, word2list = [],[]
         code1s, code2s = [], []
+        itemcodes1, itemcodes2 = [],[]
         image_list = []
         for i in range(0,len(bi)):
             word1list.append(bi[i][0].lower())
@@ -265,10 +266,14 @@ def make_subject_stimlists(subject_idx):
             elif bi[i][3] == '2word':
                 code1s.append(4)
                 code2s.append(8)
+            itemcodes1.append('"' + bi[i][0] + '_' + bi[i][3] + '_list' + '"')
+            itemcodes2.append('"' + bi[i][1] + '_' + bi[i][3] + '_list' + '"')
         df_tmp['word'] = word1list
         df_tmp['code1'] = code1s
+        df_tmp['item1'] = itemcodes1
         df_tmp['word2'] = word2list
         df_tmp['code2'] = code2s
+        df_tmp['item2'] = itemcodes2
         df_tmp['image'] = image_list
         df_tmp.to_csv('redboat/SubjectLists/Subject_%s_List_Block_%s' %(subject_idx+1,b),index=None,sep = " ")
 
@@ -323,6 +328,7 @@ def make_subject_stimlists(subject_idx):
         df_tmp = pd.DataFrame(jitters,columns=['jitter'])
         word1list, word2list = [],[]
         code1s, code2s = [], []
+        itemcodes1, itemcodes2 = [],[]
         image_list = []
         for i in range(0,len(bi)):
             word1list.append(bi[i][0].lower())
@@ -334,9 +340,13 @@ def make_subject_stimlists(subject_idx):
             elif bi[i][3] == '2word':
                 code1s.append(64)
                 code2s.append(128)
+            itemcodes1.append('"' + bi[i][0] + '_' + bi[i][3] + '_comp' + '"')
+            itemcodes2.append('"' + bi[i][1] + '_' + bi[i][3] + '_comp' + '"')
         df_tmp['word'] = word1list
         df_tmp['code1'] = code1s
+        df_tmp['item1'] = itemcodes1
         df_tmp['word2'] = word2list
         df_tmp['code2'] = code2s
+        df_tmp['item2'] = itemcodes2
         df_tmp['image'] = image_list
         df_tmp.to_csv('redboat/SubjectLists/Subject_%s_Composition_Block_%s' %(subject_idx+1,b),index=None, sep =" ")
