@@ -38,7 +38,7 @@ ii. No 1st word item could appear with a single noun more than twice.
 
 2. B & P used a random ISI between trials sampled from a normal distribution with mean of 400 ms. Here, a discrete uniform distribution across 200, 300, 400, 500, and 600 ms was used, and added to an initial 100 ms of blank screen on each trial.
 
-3. This version does not include the symbol string condition used in B & P.
+3. This version does not include the symbol string condition used in B & P, but the stimuli are included in /stim.
 
 # Timing parameters for trials:
 
