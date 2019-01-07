@@ -4,7 +4,7 @@ trial {
   trial_type = fixed;
   picture {text blank; x = 0; y = 0;};
   time = 0;
-  duration = 300;};
+  duration = 100;};
 
 trial {
   trial_duration = stimuli_length;
@@ -19,6 +19,7 @@ trial {
   duration = 300;
   deltat=600;};
 
+
 trial {
   trial_duration = stimuli_length;
   trial_type = fixed;
@@ -27,3 +28,10 @@ trial {
   duration = 600;};
 
 trial {trial_type = first_response; trial_duration = forever;  picture {bitmap $picture1; x =0; y=0;}; time=0;};
+
+  trial {
+    trial_duration = stimuli_length;
+    trial_type = fixed;
+    picture $cor;
+    time = 0;
+    duration = 600;};
