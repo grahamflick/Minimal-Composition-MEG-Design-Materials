@@ -1,0 +1,1200 @@
+# RedBoat Scenario File #
+
+scenario = "redboat";
+no_logfile = false;
+default_font_size = 28;
+response_matching = simple_matching;
+active_buttons = 2;
+response_port_output = false;
+default_background_color = 128,128,128;
+default_font = "Arial";
+
+#send codes to Meglab
+#write_codes = true;
+#pulse_width = 5;
+
+begin;
+################################################################################
+###                                 READ ME                                  ###
+################################################################################
+
+# This is a template for redboat. It builds an experiment entirely in Presentation's SDL.
+# The first ~150 lines define instructions/between block screens.
+# Lines 150-650 define all of the experimental stimuli.
+# The main experimental blocks begin around line 715. This scenario contains fillable
+# Template blocks. See the accompanying python scripts for details on how these are filled.
+# For timing parameters, see the Template File "MainTrial.tem".
+
+#              ###                                               ###
+#              ########### BEGIN OBJECT DEFINITIONS ################
+#              ###                                               ###
+
+################################################################################
+###################           Fixation & Blank Screen           ################
+################################################################################
+
+text { caption = "+"; font_size = 50; font_color = 0,0,0; background_color = 128,128,128; } asterisk;
+text { caption = " "; font_size = 40; } blank;
+bitmap {filename= "diode.jpg"; height=200; width=200; }diode;
+picture { background_color = 128, 128, 128; text asterisk; x =0; y=0;} asterisk_pic;
+
+# set up the instructions and information to be provided to subject #
+text { caption = "Welcome to our experiment!
+
+Please lay still while we set up the recording."; font_size = 14; } welcome_text;
+picture {background_color = 128,128,128; text welcome_text; x = 0; y = 100;} welcome_pic;
+
+################################################################################
+###################           Intro Instructions                ################
+################################################################################
+
+########## Welcome message
+text { caption = "Welcome to our experiment! Please press the left button to read through these instructions!"; font_size =14; } instruct1;
+picture {background_color = 128,128,128; text instruct1; x = 0; y = 100;} instruct1_pic;
+
+########## 2 types of blocks
+text {caption = "Throughout this experiment, you will read words on the screen
+
+and then judge whether those words match or mismatch a picture that appears on the screen"; font_size = 14;} instruct2;
+picture {background_color = 128,128,128; text instruct2; x = 0; y = 100;} instruct2_pic;
+
+########## List blocks
+text {caption = "There will be 2 types of Blocks."; font_size = 14;} instruct3;
+picture {background_color = 128,128,128; text instruct3; x = 0; y = 100;} instruct3_pic;
+
+text{caption = "In LIST blocks, you will see either a list of words (CUP, BOAT),
+
+or a non-word and a word (xwk BOAT).
+
+If the picture matches ANY of the words, press the LEFT button.
+
+If the picture does not match any of the words, press the RIGHT button."; font_size = 14;} instruct4;
+picture {background_color = 128,128,128; text instruct4; x = 0; y = 100;} instruct4_pic;
+
+########## Phrase blocks
+text { caption = "In PHRASE blocks, you will see either a phrase (RED BOAT), or
+
+a non-word and then a word (xwk BOAT).
+
+If the picture matches ALL of the words, press the LEFT button.
+
+If the pictures does not match all of the words, press the RIGHT button."; font_size = 14;} instruct5;
+picture {background_color = 128,128,128; text instruct5; x = 0; y = 100;} instruct5_pic;
+
+################################################################################
+###################           RESPONSE buttons                  ################
+################################################################################
+text {caption = "On each trial, press the LEFT button to respond MATCH and the RIGHT button to respond NO MATCH"; font_size = 14; }instruct6;
+picture {background_color = 128,128,128; text instruct6; x = 0; y = 100;} instruct6_pic;
+
+################################################################################
+###################               Practice Instructions         ################
+################################################################################
+
+######### START OF PRACTICE
+text { caption = "We will now do some practice trials!
+
+After each trial, the correct answer for that item will appear on the screen!
+
+Please press the left button to begin."; font_size = 14; } instruct7;
+picture {background_color = 128,128,128; text instruct6; x = 0; y = 100;} instruct7_pic;
+
+######### END OF PRACTICE
+text { caption = "That's the end of the practice! Please let the experimenter know if you have any questions!"; font_size = 14; } end_practice;
+picture {background_color = 128,128,128; text end_practice; x = 0; y = 100;} end_practice_pic;
+
+
+###### BLOCK LABELS FOR PRACTICE
+
+picture {text { caption = "This is a LIST block.
+
+If the picture matches ANY of the words, press the LEFT button.
+
+If the picture does not match any of the words, press the RIGHT button."; font_size=14;}; x=0; y = 100;} list_block;
+
+picture {text { caption = "This is a PHRASE block.
+
+If the picture matches ALL of the words, press the LEFT button.
+
+If the picture does not match all of the words, press the RIGHT button."; font_size=14;}; x=0; y = 100;} phrase_block;
+
+
+
+
+################################################################################
+###################          Between Block Instructions         ################
+################################################################################
+
+######## The first block
+picture {background_color = 128, 128, 128;
+	text { caption = "The first block is a list block.
+
+Press the left button to begin."; font_size = 14;}; x = 0; y= 0;} firstblock;
+
+#### THE NEXT BLOCK IS A PHRASE BLOCK
+picture {background_color = 128, 128, 128; text { caption = "Please take a short break.
+
+The next block is a PHRASE block.
+
+Press the left button to continue."; font_size = 14;}; x = 0; y= 0;} phrase_break;
+
+#### THE NEXT BLOCK IS A LIST BLOCK
+picture {background_color = 128, 128, 128; text { caption = "Please take a short break.
+
+The next block is a LIST block.
+
+Press the left button to continue."; font_size = 14;}; x = 0; y= 0;} list_break;
+
+################################################################################
+###################         End message                         ################
+################################################################################
+picture { text {caption = "The experiment is now over. Thank you for your participation!
+
+Please lay still until the experimenter opens the door!"; font_size=30;}; x = 0; y = 100;} theEnd_pic;
+
+
+
+
+################################################################################
+###################             DEFINING STIMULI                ################
+################################################################################
+
+################## Define every individual word as a picture #################
+
+picture { text {caption = "red"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} red;
+picture { text {caption = "blue"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} blue;
+picture { text {caption = "pink"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} pink;
+picture { text {caption = "black"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} black;
+picture { text {caption = "green"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} green;
+picture { text {caption = "brown"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} brown;
+
+picture { text {caption = "xkq"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} xkq;
+picture { text {caption = "qxsw"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} qxsw;
+picture { text {caption = "mtpv"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} mtpv;
+picture { text {caption = "rjdnv"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} rjdnv;
+picture { text {caption = "wvcnz"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} wvcnz;
+picture { text {caption = "zbxlv"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} zbxlv;
+
+picture { text {caption = "cup"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} cup;
+picture { text {caption = "boat"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} boat;
+picture { text {caption = "lamp"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} lamp;
+picture { text {caption = "plane"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} plane;
+picture { text {caption = "cross"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} cross;
+picture { text {caption = "house"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} house;
+
+picture { text {caption = "bag"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} bag;
+picture { text {caption = "bell"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} bell;
+picture { text {caption = "bone"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} bone;
+picture { text {caption = "bow"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} bow;
+picture { text {caption = "cane"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} cane;
+picture { text {caption = "car"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} car;
+picture { text {caption = "disc"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} disc;
+picture { text {caption = "flag"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} flag;
+picture { text {caption = "fork"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} fork;
+picture { text {caption = "hand"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} hand;
+picture { text {caption = "heart"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} heart;
+picture { text {caption = "key"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} key;
+picture { text {caption = "leaf"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} leaf;
+picture { text {caption = "lock"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} lock;
+picture { text {caption = "note"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} note;
+picture { text {caption = "shoe"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} shoe;
+picture { text {caption = "square"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} square;
+picture { text {caption = "star"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} star;
+picture { text {caption = "tree"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} tree;
+
+picture { text {caption = "Match!"; font_size = 36;}; x= 0; y = 0;} Match;
+picture { text {caption = "No Match!"; font_size = 36;}; x= 0; y = 0;} NoMatch;
+
+############################### NOW THE IMAGES #################################
+bitmap {filename="Stim/BlackBag_1.jpg" ; height = 300; width = 250; } BlackBag_1 ;
+bitmap {filename="Stim/BlackBag_2.jpg" ; height = 300; width = 250; }	BlackBag_2 ;
+bitmap {filename="Stim/BlackBag_3.jpg" ; height = 300; width = 250; }	BlackBag_3 ;
+bitmap {filename="Stim/BlackBell_1.jpg" ; height = 300; width = 250; }	BlackBell_1 ;
+bitmap {filename="Stim/BlackBell_2.jpg" ; height = 300; width = 250; }	BlackBell_2 ;
+bitmap {filename="Stim/BlackBell_3.jpg" ; height = 300; width = 250; }	BlackBell_3 ;
+bitmap {filename="Stim/BlackBoat_1.jpg" ; height = 300; width = 250; }	BlackBoat_1 ;
+bitmap {filename="Stim/BlackBoat_2.jpg" ; height = 300; width = 250; }	BlackBoat_2 ;
+bitmap {filename="Stim/BlackBoat_3.jpg" ; height = 300; width = 250; }	BlackBoat_3 ;
+bitmap {filename="Stim/BlackBone_1.jpg" ; height = 300; width = 250; }	BlackBone_1 ;
+bitmap {filename="Stim/BlackBone_2.jpg" ; height = 300; width = 250; }	BlackBone_2 ;
+bitmap {filename="Stim/BlackBone_3.jpg" ; height = 300; width = 250; }	BlackBone_3 ;
+bitmap {filename="Stim/BlackBow_1.jpg" ; height = 300; width = 250; }	BlackBow_1 ;
+bitmap {filename="Stim/BlackBow_2.jpg" ; height = 300; width = 250; }	BlackBow_2 ;
+bitmap {filename="Stim/BlackBow_3.jpg" ; height = 300; width = 250; }	BlackBow_3 ;
+bitmap {filename="Stim/BlackCane_1.jpg" ; height = 300; width = 250; }	BlackCane_1 ;
+bitmap {filename="Stim/BlackCane_2.jpg" ; height = 300; width = 250; }	BlackCane_2 ;
+bitmap {filename="Stim/BlackCane_3.jpg" ; height = 300; width = 250; }	BlackCane_3 ;
+bitmap {filename="Stim/BlackCar_1.jpg" ; height = 300; width = 250; }	BlackCar_1 ;
+bitmap {filename="Stim/BlackCar_2.jpg" ; height = 300; width = 250; }	BlackCar_2 ;
+bitmap {filename="Stim/BlackCar_3.jpg" ; height = 300; width = 250; }	BlackCar_3 ;
+bitmap {filename="Stim/BlackCross_1.jpg" ; height = 300; width = 250; }	BlackCross_1 ;
+bitmap {filename="Stim/BlackCross_2.jpg" ; height = 300; width = 250; }	BlackCross_2 ;
+bitmap {filename="Stim/BlackCross_3.jpg" ; height = 300; width = 250; }	BlackCross_3 ;
+bitmap {filename="Stim/BlackCup_1.jpg" ; height = 300; width = 250; }	BlackCup_1 ;
+bitmap {filename="Stim/BlackCup_2.jpg" ; height = 300; width = 250; }	BlackCup_2 ;
+bitmap {filename="Stim/BlackCup_3.jpg" ; height = 300; width = 250; }	BlackCup_3 ;
+bitmap {filename="Stim/BlackDisc_1.jpg" ; height = 300; width = 250; }	BlackDisc_1 ;
+bitmap {filename="Stim/BlackDisc_2.jpg" ; height = 300; width = 250; }	BlackDisc_2 ;
+bitmap {filename="Stim/BlackDisc_3.jpg" ; height = 300; width = 250; }	BlackDisc_3 ;
+bitmap {filename="Stim/BlackFlag_1.jpg" ; height = 300; width = 250; }	BlackFlag_1 ;
+bitmap {filename="Stim/BlackFlag_2.jpg" ; height = 300; width = 250; }	BlackFlag_2 ;
+bitmap {filename="Stim/BlackFlag_3.jpg" ; height = 300; width = 250; }	BlackFlag_3 ;
+bitmap {filename="Stim/BlackFork_1.jpg" ; height = 300; width = 250; }	BlackFork_1 ;
+bitmap {filename="Stim/BlackFork_2.jpg" ; height = 300; width = 250; }	BlackFork_2 ;
+bitmap {filename="Stim/BlackFork_3.jpg" ; height = 300; width = 250; }	BlackFork_3 ;
+bitmap {filename="Stim/BlackHand_1.jpg" ; height = 300; width = 250; }	BlackHand_1 ;
+bitmap {filename="Stim/BlackHand_2.jpg" ; height = 300; width = 250; }	BlackHand_2 ;
+bitmap {filename="Stim/BlackHand_3.jpg" ; height = 300; width = 250; }	BlackHand_3 ;
+bitmap {filename="Stim/BlackHeart_1.jpg" ; height = 300; width = 250; }	BlackHeart_1 ;
+bitmap {filename="Stim/BlackHeart_2.jpg" ; height = 300; width = 250; }	BlackHeart_2 ;
+bitmap {filename="Stim/BlackHeart_3.jpg" ; height = 300; width = 250; }	BlackHeart_3 ;
+bitmap {filename="Stim/BlackHouse_1.jpg" ; height = 300; width = 250; }	BlackHouse_1 ;
+bitmap {filename="Stim/BlackHouse_2.jpg" ; height = 300; width = 250; }	BlackHouse_2 ;
+bitmap {filename="Stim/BlackHouse_3.jpg" ; height = 300; width = 250; }	BlackHouse_3 ;
+bitmap {filename="Stim/BlackKey_1.jpg" ; height = 300; width = 250; }	BlackKey_1 ;
+bitmap {filename="Stim/BlackKey_2.jpg" ; height = 300; width = 250; }	BlackKey_2 ;
+bitmap {filename="Stim/BlackKey_3.jpg" ; height = 300; width = 250; }	BlackKey_3 ;
+bitmap {filename="Stim/BlackLamp_1.jpg" ; height = 300; width = 250; }	BlackLamp_1 ;
+bitmap {filename="Stim/BlackLamp_2.jpg" ; height = 300; width = 250; }	BlackLamp_2 ;
+bitmap {filename="Stim/BlackLamp_3.jpg" ; height = 300; width = 250; }	BlackLamp_3 ;
+bitmap {filename="Stim/BlackLeaf_1.jpg" ; height = 300; width = 250; }	BlackLeaf_1 ;
+bitmap {filename="Stim/BlackLeaf_2.jpg" ; height = 300; width = 250; }	BlackLeaf_2 ;
+bitmap {filename="Stim/BlackLeaf_3.jpg" ; height = 300; width = 250; }	BlackLeaf_3 ;
+bitmap {filename="Stim/BlackLock_1.jpg" ; height = 300; width = 250; }	BlackLock_1 ;
+bitmap {filename="Stim/BlackLock_2.jpg" ; height = 300; width = 250; }	BlackLock_2 ;
+bitmap {filename="Stim/BlackLock_3.jpg" ; height = 300; width = 250; }	BlackLock_3 ;
+bitmap {filename="Stim/BlackNote_1.jpg" ; height = 300; width = 250; }	BlackNote_1 ;
+bitmap {filename="Stim/BlackNote_2.jpg" ; height = 300; width = 250; }	BlackNote_2 ;
+bitmap {filename="Stim/BlackNote_3.jpg" ; height = 300; width = 250; }	BlackNote_3 ;
+bitmap {filename="Stim/BlackPlane_1.jpg" ; height = 300; width = 250; }	BlackPlane_1 ;
+bitmap {filename="Stim/BlackPlane_2.jpg" ; height = 300; width = 250; }	BlackPlane_2 ;
+bitmap {filename="Stim/BlackPlane_3.jpg" ; height = 300; width = 250; }	BlackPlane_3 ;
+bitmap {filename="Stim/BlackShoe_1.jpg" ; height = 300; width = 250; }	BlackShoe_1 ;
+bitmap {filename="Stim/BlackShoe_2.jpg" ; height = 300; width = 250; }	BlackShoe_2 ;
+bitmap {filename="Stim/BlackShoe_3.jpg" ; height = 300; width = 250; }	BlackShoe_3 ;
+bitmap {filename="Stim/BlackSquare_1.jpg" ; height = 300; width = 250; }	BlackSquare_1 ;
+bitmap {filename="Stim/BlackSquare_2.jpg" ; height = 300; width = 250; }	BlackSquare_2 ;
+bitmap {filename="Stim/BlackSquare_3.jpg" ; height = 300; width = 250; }	BlackSquare_3 ;
+bitmap {filename="Stim/BlackStar_1.jpg" ; height = 300; width = 250; }	BlackStar_1 ;
+bitmap {filename="Stim/BlackStar_2.jpg" ; height = 300; width = 250; }	BlackStar_2 ;
+bitmap {filename="Stim/BlackStar_3.jpg" ; height = 300; width = 250; }	BlackStar_3 ;
+bitmap {filename="Stim/BlackTree_1.jpg" ; height = 300; width = 250; }	BlackTree_1 ;
+bitmap {filename="Stim/BlackTree_2.jpg" ; height = 300; width = 250; }	BlackTree_2 ;
+bitmap {filename="Stim/BlackTree_3.jpg" ; height = 300; width = 250; }	BlackTree_3 ;
+bitmap {filename="Stim/Blue.jpg" ; height = 300; width = 250; }	Blue ;
+bitmap {filename="Stim/BlueBag_1.jpg" ; height = 300; width = 250; }	BlueBag_1 ;
+bitmap {filename="Stim/BlueBag_2.jpg" ; height = 300; width = 250; }	BlueBag_2 ;
+bitmap {filename="Stim/BlueBag_3.jpg" ; height = 300; width = 250; }	BlueBag_3 ;
+bitmap {filename="Stim/BlueBell_1.jpg" ; height = 300; width = 250; }	BlueBell_1 ;
+bitmap {filename="Stim/BlueBell_2.jpg" ; height = 300; width = 250; }	BlueBell_2 ;
+bitmap {filename="Stim/BlueBell_3.jpg" ; height = 300; width = 250; }	BlueBell_3 ;
+bitmap {filename="Stim/BlueBoat_1.jpg" ; height = 300; width = 250; }	BlueBoat_1 ;
+bitmap {filename="Stim/BlueBoat_2.jpg" ; height = 300; width = 250; }	BlueBoat_2 ;
+bitmap {filename="Stim/BlueBoat_3.jpg" ; height = 300; width = 250; }	BlueBoat_3 ;
+bitmap {filename="Stim/BlueBone_1.jpg" ; height = 300; width = 250; }	BlueBone_1 ;
+bitmap {filename="Stim/BlueBone_2.jpg" ; height = 300; width = 250; }	BlueBone_2 ;
+bitmap {filename="Stim/BlueBone_3.jpg" ; height = 300; width = 250; }	BlueBone_3 ;
+bitmap {filename="Stim/BlueBow_1.jpg" ; height = 300; width = 250; }	BlueBow_1 ;
+bitmap {filename="Stim/BlueBow_2.jpg" ; height = 300; width = 250; }	BlueBow_2 ;
+bitmap {filename="Stim/BlueBow_3.jpg" ; height = 300; width = 250; }	BlueBow_3 ;
+bitmap {filename="Stim/BlueCane_1.jpg" ; height = 300; width = 250; }	BlueCane_1 ;
+bitmap {filename="Stim/BlueCane_2.jpg" ; height = 300; width = 250; }	BlueCane_2 ;
+bitmap {filename="Stim/BlueCane_3.jpg" ; height = 300; width = 250; }	BlueCane_3 ;
+bitmap {filename="Stim/BlueCar_1.jpg" ; height = 300; width = 250; }	BlueCar_1 ;
+bitmap {filename="Stim/BlueCar_2.jpg" ; height = 300; width = 250; }	BlueCar_2 ;
+bitmap {filename="Stim/BlueCar_3.jpg" ; height = 300; width = 250; }	BlueCar_3 ;
+bitmap {filename="Stim/BlueCross_1.jpg" ; height = 300; width = 250; }	BlueCross_1 ;
+bitmap {filename="Stim/BlueCross_2.jpg" ; height = 300; width = 250; }	BlueCross_2 ;
+bitmap {filename="Stim/BlueCross_3.jpg" ; height = 300; width = 250; }	BlueCross_3 ;
+bitmap {filename="Stim/BlueCup_1.jpg" ; height = 300; width = 250; }	BlueCup_1 ;
+bitmap {filename="Stim/BlueCup_2.jpg" ; height = 300; width = 250; }	BlueCup_2 ;
+bitmap {filename="Stim/BlueCup_3.jpg" ; height = 300; width = 250; }	BlueCup_3 ;
+bitmap {filename="Stim/BlueDisc_1.jpg" ; height = 300; width = 250; }	BlueDisc_1 ;
+bitmap {filename="Stim/BlueDisc_2.jpg" ; height = 300; width = 250; }	BlueDisc_2 ;
+bitmap {filename="Stim/BlueDisc_3.jpg" ; height = 300; width = 250; }	BlueDisc_3 ;
+bitmap {filename="Stim/BlueFlag_1.jpg" ; height = 300; width = 250; }	BlueFlag_1 ;
+bitmap {filename="Stim/BlueFlag_2.jpg" ; height = 300; width = 250; }	BlueFlag_2 ;
+bitmap {filename="Stim/BlueFlag_3.jpg" ; height = 300; width = 250; }	BlueFlag_3 ;
+bitmap {filename="Stim/BlueFork_1.jpg" ; height = 300; width = 250; }	BlueFork_1 ;
+bitmap {filename="Stim/BlueFork_2.jpg" ; height = 300; width = 250; }	BlueFork_2 ;
+bitmap {filename="Stim/BlueFork_3.jpg" ; height = 300; width = 250; }	BlueFork_3 ;
+bitmap {filename="Stim/BlueHand_1.jpg" ; height = 300; width = 250; }	BlueHand_1 ;
+bitmap {filename="Stim/BlueHand_2.jpg" ; height = 300; width = 250; }	BlueHand_2 ;
+bitmap {filename="Stim/BlueHand_3.jpg" ; height = 300; width = 250; }	BlueHand_3 ;
+bitmap {filename="Stim/BlueHeart_1.jpg" ; height = 300; width = 250; }	BlueHeart_1 ;
+bitmap {filename="Stim/BlueHeart_2.jpg" ; height = 300; width = 250; }	BlueHeart_2 ;
+bitmap {filename="Stim/BlueHeart_3.jpg" ; height = 300; width = 250; }	BlueHeart_3 ;
+bitmap {filename="Stim/BlueHouse_1.jpg" ; height = 300; width = 250; }	BlueHouse_1 ;
+bitmap {filename="Stim/BlueHouse_2.jpg" ; height = 300; width = 250; }	BlueHouse_2 ;
+bitmap {filename="Stim/BlueHouse_3.jpg" ; height = 300; width = 250; }	BlueHouse_3 ;
+bitmap {filename="Stim/BlueKey_1.jpg" ; height = 300; width = 250; }	BlueKey_1 ;
+bitmap {filename="Stim/BlueKey_2.jpg" ; height = 300; width = 250; }	BlueKey_2 ;
+bitmap {filename="Stim/BlueKey_3.jpg" ; height = 300; width = 250; }	BlueKey_3 ;
+bitmap {filename="Stim/BlueLamp_1.jpg" ; height = 300; width = 250; }	BlueLamp_1 ;
+bitmap {filename="Stim/BlueLamp_2.jpg" ; height = 300; width = 250; }	BlueLamp_2 ;
+bitmap {filename="Stim/BlueLamp_3.jpg" ; height = 300; width = 250; }	BlueLamp_3 ;
+bitmap {filename="Stim/BlueLeaf_1.jpg" ; height = 300; width = 250; }	BlueLeaf_1 ;
+bitmap {filename="Stim/BlueLeaf_2.jpg" ; height = 300; width = 250; }	BlueLeaf_2 ;
+bitmap {filename="Stim/BlueLeaf_3.jpg" ; height = 300; width = 250; }	BlueLeaf_3 ;
+bitmap {filename="Stim/BlueLock_1.jpg" ; height = 300; width = 250; }	BlueLock_1 ;
+bitmap {filename="Stim/BlueLock_2.jpg" ; height = 300; width = 250; }	BlueLock_2 ;
+bitmap {filename="Stim/BlueLock_3.jpg" ; height = 300; width = 250; }	BlueLock_3 ;
+bitmap {filename="Stim/BlueNote_1.jpg" ; height = 300; width = 250; }	BlueNote_1 ;
+bitmap {filename="Stim/BlueNote_2.jpg" ; height = 300; width = 250; }	BlueNote_2 ;
+bitmap {filename="Stim/BlueNote_3.jpg" ; height = 300; width = 250; }	BlueNote_3 ;
+bitmap {filename="Stim/BluePlane_1.jpg" ; height = 300; width = 250; }	BluePlane_1 ;
+bitmap {filename="Stim/BluePlane_2.jpg" ; height = 300; width = 250; }	BluePlane_2 ;
+bitmap {filename="Stim/BluePlane_3.jpg" ; height = 300; width = 250; }	BluePlane_3 ;
+bitmap {filename="Stim/BlueShoe_1.jpg" ; height = 300; width = 250; }	BlueShoe_1 ;
+bitmap {filename="Stim/BlueShoe_2.jpg" ; height = 300; width = 250; }	BlueShoe_2 ;
+bitmap {filename="Stim/BlueShoe_3.jpg" ; height = 300; width = 250; }	BlueShoe_3 ;
+bitmap {filename="Stim/BlueSquare_1.jpg" ; height = 300; width = 250; }	BlueSquare_1 ;
+bitmap {filename="Stim/BlueSquare_2.jpg" ; height = 300; width = 250; }	BlueSquare_2 ;
+bitmap {filename="Stim/BlueSquare_3.jpg" ; height = 300; width = 250; }	BlueSquare_3 ;
+bitmap {filename="Stim/BlueStar_1.jpg" ; height = 300; width = 250; }	BlueStar_1 ;
+bitmap {filename="Stim/BlueStar_2.jpg" ; height = 300; width = 250; }	BlueStar_2 ;
+bitmap {filename="Stim/BlueStar_3.jpg" ; height = 300; width = 250; }	BlueStar_3 ;
+bitmap {filename="Stim/BlueTree_1.jpg" ; height = 300; width = 250; }	BlueTree_1 ;
+bitmap {filename="Stim/BlueTree_2.jpg" ; height = 300; width = 250; }	BlueTree_2 ;
+bitmap {filename="Stim/BlueTree_3.jpg" ; height = 300; width = 250; }	BlueTree_3 ;
+bitmap {filename="Stim/Boat.jpg" ; height = 300; width = 250; }	Boat ;
+bitmap {filename="Stim/Bone.jpg" ; height = 300; width = 250; }	Bone ;
+bitmap {filename="Stim/Bow.jpg" ; height = 300; width = 250; }	Bow ;
+bitmap {filename="Stim/Brown.jpg" ; height = 300; width = 250; }	Brown ;
+bitmap {filename="Stim/BrownBag_1.jpg" ; height = 300; width = 250; }	BrownBag_1 ;
+bitmap {filename="Stim/BrownBag_2.jpg" ; height = 300; width = 250; }	BrownBag_2 ;
+bitmap {filename="Stim/BrownBag_3.jpg" ; height = 300; width = 250; }	BrownBag_3 ;
+bitmap {filename="Stim/BrownBell_1.jpg" ; height = 300; width = 250; }	BrownBell_1 ;
+bitmap {filename="Stim/BrownBell_2.jpg" ; height = 300; width = 250; }	BrownBell_2 ;
+bitmap {filename="Stim/BrownBell_3.jpg" ; height = 300; width = 250; }	BrownBell_3 ;
+bitmap {filename="Stim/BrownBoat_1.jpg" ; height = 300; width = 250; }	BrownBoat_1 ;
+bitmap {filename="Stim/BrownBoat_2.jpg" ; height = 300; width = 250; }	BrownBoat_2 ;
+bitmap {filename="Stim/BrownBoat_3.jpg" ; height = 300; width = 250; }	BrownBoat_3 ;
+bitmap {filename="Stim/BrownBone_1.jpg" ; height = 300; width = 250; }	BrownBone_1 ;
+bitmap {filename="Stim/BrownBone_2.jpg" ; height = 300; width = 250; }	BrownBone_2 ;
+bitmap {filename="Stim/BrownBone_3.jpg" ; height = 300; width = 250; }	BrownBone_3 ;
+bitmap {filename="Stim/BrownBow_1.jpg" ; height = 300; width = 250; }	BrownBow_1 ;
+bitmap {filename="Stim/BrownBow_2.jpg" ; height = 300; width = 250; }	BrownBow_2 ;
+bitmap {filename="Stim/BrownBow_3.jpg" ; height = 300; width = 250; }	BrownBow_3 ;
+bitmap {filename="Stim/BrownCane_1.jpg" ; height = 300; width = 250; }	BrownCane_1 ;
+bitmap {filename="Stim/BrownCane_2.jpg" ; height = 300; width = 250; }	BrownCane_2 ;
+bitmap {filename="Stim/BrownCane_3.jpg" ; height = 300; width = 250; }	BrownCane_3 ;
+bitmap {filename="Stim/BrownCar_1.jpg" ; height = 300; width = 250; }	BrownCar_1 ;
+bitmap {filename="Stim/BrownCar_2.jpg" ; height = 300; width = 250; }	BrownCar_2 ;
+bitmap {filename="Stim/BrownCar_3.jpg" ; height = 300; width = 250; }	BrownCar_3 ;
+bitmap {filename="Stim/BrownCross_1.jpg" ; height = 300; width = 250; }	BrownCross_1 ;
+bitmap {filename="Stim/BrownCross_2.jpg" ; height = 300; width = 250; }	BrownCross_2 ;
+bitmap {filename="Stim/BrownCross_3.jpg" ; height = 300; width = 250; }	BrownCross_3 ;
+bitmap {filename="Stim/BrownCup_1.jpg" ; height = 300; width = 250; }	BrownCup_1 ;
+bitmap {filename="Stim/BrownCup_2.jpg" ; height = 300; width = 250; }	BrownCup_2 ;
+bitmap {filename="Stim/BrownCup_3.jpg" ; height = 300; width = 250; }	BrownCup_3 ;
+bitmap {filename="Stim/BrownDisc_1.jpg" ; height = 300; width = 250; }	BrownDisc_1 ;
+bitmap {filename="Stim/BrownDisc_2.jpg" ; height = 300; width = 250; }	BrownDisc_2 ;
+bitmap {filename="Stim/BrownDisc_3.jpg" ; height = 300; width = 250; }	BrownDisc_3 ;
+bitmap {filename="Stim/BrownFlag_1.jpg" ; height = 300; width = 250; }	BrownFlag_1 ;
+bitmap {filename="Stim/BrownFlag_2.jpg" ; height = 300; width = 250; }	BrownFlag_2 ;
+bitmap {filename="Stim/BrownFlag_3.jpg" ; height = 300; width = 250; }	BrownFlag_3 ;
+bitmap {filename="Stim/BrownFork_1.jpg" ; height = 300; width = 250; }	BrownFork_1 ;
+bitmap {filename="Stim/BrownFork_2.jpg" ; height = 300; width = 250; }	BrownFork_2 ;
+bitmap {filename="Stim/BrownFork_3.jpg" ; height = 300; width = 250; }	BrownFork_3 ;
+bitmap {filename="Stim/BrownHand_1.jpg" ; height = 300; width = 250; }	BrownHand_1 ;
+bitmap {filename="Stim/BrownHand_2.jpg" ; height = 300; width = 250; }	BrownHand_2 ;
+bitmap {filename="Stim/BrownHand_3.jpg" ; height = 300; width = 250; }	BrownHand_3 ;
+bitmap {filename="Stim/BrownHeart_1.jpg" ; height = 300; width = 250; }	BrownHeart_1 ;
+bitmap {filename="Stim/BrownHeart_2.jpg" ; height = 300; width = 250; }	BrownHeart_2 ;
+bitmap {filename="Stim/BrownHeart_3.jpg" ; height = 300; width = 250; }	BrownHeart_3 ;
+bitmap {filename="Stim/BrownHouse_1.jpg" ; height = 300; width = 250; }	BrownHouse_1 ;
+bitmap {filename="Stim/BrownHouse_2.jpg" ; height = 300; width = 250; }	BrownHouse_2 ;
+bitmap {filename="Stim/BrownHouse_3.jpg" ; height = 300; width = 250; }	BrownHouse_3 ;
+bitmap {filename="Stim/BrownKey_1.jpg" ; height = 300; width = 250; }	BrownKey_1 ;
+bitmap {filename="Stim/BrownKey_2.jpg" ; height = 300; width = 250; }	BrownKey_2 ;
+bitmap {filename="Stim/BrownKey_3.jpg" ; height = 300; width = 250; }	BrownKey_3 ;
+bitmap {filename="Stim/BrownLamp_1.jpg" ; height = 300; width = 250; }	BrownLamp_1 ;
+bitmap {filename="Stim/BrownLamp_2.jpg" ; height = 300; width = 250; }	BrownLamp_2 ;
+bitmap {filename="Stim/BrownLamp_3.jpg" ; height = 300; width = 250; }	BrownLamp_3 ;
+bitmap {filename="Stim/BrownLeaf_1.jpg" ; height = 300; width = 250; }	BrownLeaf_1 ;
+bitmap {filename="Stim/BrownLeaf_2.jpg" ; height = 300; width = 250; }	BrownLeaf_2 ;
+bitmap {filename="Stim/BrownLeaf_3.jpg" ; height = 300; width = 250; }	BrownLeaf_3 ;
+bitmap {filename="Stim/BrownLock_1.jpg" ; height = 300; width = 250; }	BrownLock_1 ;
+bitmap {filename="Stim/BrownLock_2.jpg" ; height = 300; width = 250; }	BrownLock_2 ;
+bitmap {filename="Stim/BrownLock_3.jpg" ; height = 300; width = 250; }	BrownLock_3 ;
+bitmap {filename="Stim/BrownNote_1.jpg" ; height = 300; width = 250; }	BrownNote_1 ;
+bitmap {filename="Stim/BrownNote_2.jpg" ; height = 300; width = 250; }	BrownNote_2 ;
+bitmap {filename="Stim/BrownNote_3.jpg" ; height = 300; width = 250; }	BrownNote_3 ;
+bitmap {filename="Stim/BrownPlane_1.jpg" ; height = 300; width = 250; }	BrownPlane_1 ;
+bitmap {filename="Stim/BrownPlane_2.jpg" ; height = 300; width = 250; }	BrownPlane_2 ;
+bitmap {filename="Stim/BrownPlane_3.jpg" ; height = 300; width = 250; }	BrownPlane_3 ;
+bitmap {filename="Stim/BrownShoe_1.jpg" ; height = 300; width = 250; }	BrownShoe_1 ;
+bitmap {filename="Stim/BrownShoe_2.jpg" ; height = 300; width = 250; }	BrownShoe_2 ;
+bitmap {filename="Stim/BrownShoe_3.jpg" ; height = 300; width = 250; }	BrownShoe_3 ;
+bitmap {filename="Stim/BrownSquare_1.jpg" ; height = 300; width = 250; }	BrownSquare_1 ;
+bitmap {filename="Stim/BrownSquare_2.jpg" ; height = 300; width = 250; }	BrownSquare_2 ;
+bitmap {filename="Stim/BrownSquare_3.jpg" ; height = 300; width = 250; }	BrownSquare_3 ;
+bitmap {filename="Stim/BrownStar_1.jpg" ; height = 300; width = 250; }	BrownStar_1 ;
+bitmap {filename="Stim/BrownStar_2.jpg" ; height = 300; width = 250; }	BrownStar_2 ;
+bitmap {filename="Stim/BrownStar_3.jpg" ; height = 300; width = 250; }	BrownStar_3 ;
+bitmap {filename="Stim/BrownTree_1.jpg" ; height = 300; width = 250; }	BrownTree_1 ;
+bitmap {filename="Stim/BrownTree_2.jpg" ; height = 300; width = 250; }	BrownTree_2 ;
+bitmap {filename="Stim/BrownTree_3.jpg" ; height = 300; width = 250; }	BrownTree_3 ;
+bitmap {filename="Stim/GreenAnchor_2.jpg" ; height = 300; width = 250; }	GreenAnchor_2 ;
+bitmap {filename="Stim/GreenBag_1.jpg" ; height = 300; width = 250; }	GreenBag_1 ;
+bitmap {filename="Stim/GreenBag_2.jpg" ; height = 300; width = 250; }	GreenBag_2 ;
+bitmap {filename="Stim/GreenBag_3.jpg" ; height = 300; width = 250; }	GreenBag_3 ;
+bitmap {filename="Stim/GreenBell_1.jpg" ; height = 300; width = 250; }	GreenBell_1 ;
+bitmap {filename="Stim/GreenBell_2.jpg" ; height = 300; width = 250; }	GreenBell_2 ;
+bitmap {filename="Stim/GreenBell_3.jpg" ; height = 300; width = 250; }	GreenBell_3 ;
+bitmap {filename="Stim/GreenBoat_1.jpg" ; height = 300; width = 250; }	GreenBoat_1 ;
+bitmap {filename="Stim/GreenBoat_2.jpg" ; height = 300; width = 250; }	GreenBoat_2 ;
+bitmap {filename="Stim/GreenBoat_3.jpg" ; height = 300; width = 250; }	GreenBoat_3 ;
+bitmap {filename="Stim/GreenBone_1.jpg" ; height = 300; width = 250; }	GreenBone_1 ;
+bitmap {filename="Stim/GreenBone_2.jpg" ; height = 300; width = 250; }	GreenBone_2 ;
+bitmap {filename="Stim/GreenBone_3.jpg" ; height = 300; width = 250; }	GreenBone_3 ;
+bitmap {filename="Stim/GreenBow_1.jpg" ; height = 300; width = 250; }	GreenBow_1 ;
+bitmap {filename="Stim/GreenBow_2.jpg" ; height = 300; width = 250; }	GreenBow_2 ;
+bitmap {filename="Stim/GreenBow_3.jpg" ; height = 300; width = 250; }	GreenBow_3 ;
+bitmap {filename="Stim/GreenCane_1.jpg" ; height = 300; width = 250; }	GreenCane_1 ;
+bitmap {filename="Stim/GreenCane_2.jpg" ; height = 300; width = 250; }	GreenCane_2 ;
+bitmap {filename="Stim/GreenCane_3.jpg" ; height = 300; width = 250; }	GreenCane_3 ;
+bitmap {filename="Stim/GreenCar_1.jpg" ; height = 300; width = 250; }	GreenCar_1 ;
+bitmap {filename="Stim/GreenCar_2.jpg" ; height = 300; width = 250; }	GreenCar_2 ;
+bitmap {filename="Stim/GreenCar_3.jpg" ; height = 300; width = 250; }	GreenCar_3 ;
+bitmap {filename="Stim/GreenCross_1.jpg" ; height = 300; width = 250; }	GreenCross_1 ;
+bitmap {filename="Stim/GreenCross_2.jpg" ; height = 300; width = 250; }	GreenCross_2 ;
+bitmap {filename="Stim/GreenCross_3.jpg" ; height = 300; width = 250; }	GreenCross_3 ;
+bitmap {filename="Stim/GreenCup_1.jpg" ; height = 300; width = 250; }	GreenCup_1 ;
+bitmap {filename="Stim/GreenCup_2.jpg" ; height = 300; width = 250; }	GreenCup_2 ;
+bitmap {filename="Stim/GreenCup_3.jpg" ; height = 300; width = 250; }	GreenCup_3 ;
+bitmap {filename="Stim/GreenDisc_1.jpg" ; height = 300; width = 250; }	GreenDisc_1 ;
+bitmap {filename="Stim/GreenDisc_2.jpg" ; height = 300; width = 250; }	GreenDisc_2 ;
+bitmap {filename="Stim/GreenDisc_3.jpg" ; height = 300; width = 250; }	GreenDisc_3 ;
+bitmap {filename="Stim/GreenFlag_1.jpg" ; height = 300; width = 250; }	GreenFlag_1 ;
+bitmap {filename="Stim/GreenFlag_2.jpg" ; height = 300; width = 250; }	GreenFlag_2 ;
+bitmap {filename="Stim/GreenFlag_3.jpg" ; height = 300; width = 250; }	GreenFlag_3 ;
+bitmap {filename="Stim/GreenFork_1.jpg" ; height = 300; width = 250; }	GreenFork_1 ;
+bitmap {filename="Stim/GreenFork_2.jpg" ; height = 300; width = 250; }	GreenFork_2 ;
+bitmap {filename="Stim/GreenFork_3.jpg" ; height = 300; width = 250; }	GreenFork_3 ;
+bitmap {filename="Stim/GreenHand_1.jpg" ; height = 300; width = 250; }	GreenHand_1 ;
+bitmap {filename="Stim/GreenHand_2.jpg" ; height = 300; width = 250; }	GreenHand_2 ;
+bitmap {filename="Stim/GreenHand_3.jpg" ; height = 300; width = 250; }	GreenHand_3 ;
+bitmap {filename="Stim/GreenHeart_1.jpg" ; height = 300; width = 250; }	GreenHeart_1 ;
+bitmap {filename="Stim/GreenHeart_2.jpg" ; height = 300; width = 250; }	GreenHeart_2 ;
+bitmap {filename="Stim/GreenHeart_3.jpg" ; height = 300; width = 250; }	GreenHeart_3 ;
+bitmap {filename="Stim/GreenHouse_1.jpg" ; height = 300; width = 250; }	GreenHouse_1 ;
+bitmap {filename="Stim/GreenHouse_2.jpg" ; height = 300; width = 250; }	GreenHouse_2 ;
+bitmap {filename="Stim/GreenHouse_3.jpg" ; height = 300; width = 250; }	GreenHouse_3 ;
+bitmap {filename="Stim/GreenKey_1.jpg" ; height = 300; width = 250; }	GreenKey_1 ;
+bitmap {filename="Stim/GreenKey_2.jpg" ; height = 300; width = 250; }	GreenKey_2 ;
+bitmap {filename="Stim/GreenKey_3.jpg" ; height = 300; width = 250; }	GreenKey_3 ;
+bitmap {filename="Stim/GreenLamp_1.jpg" ; height = 300; width = 250; }	GreenLamp_1 ;
+bitmap {filename="Stim/GreenLamp_2.jpg" ; height = 300; width = 250; }	GreenLamp_2 ;
+bitmap {filename="Stim/GreenLamp_3.jpg" ; height = 300; width = 250; }	GreenLamp_3 ;
+bitmap {filename="Stim/GreenLeaf_1.jpg" ; height = 300; width = 250; }	GreenLeaf_1 ;
+bitmap {filename="Stim/GreenLeaf_2.jpg" ; height = 300; width = 250; }	GreenLeaf_2 ;
+bitmap {filename="Stim/GreenLeaf_3.jpg" ; height = 300; width = 250; }	GreenLeaf_3 ;
+bitmap {filename="Stim/GreenLock_1.jpg" ; height = 300; width = 250; }	GreenLock_1 ;
+bitmap {filename="Stim/GreenLock_2.jpg" ; height = 300; width = 250; }	GreenLock_2 ;
+bitmap {filename="Stim/GreenLock_3.jpg" ; height = 300; width = 250; }	GreenLock_3 ;
+bitmap {filename="Stim/GreenNote_1.jpg" ; height = 300; width = 250; }	GreenNote_1 ;
+bitmap {filename="Stim/GreenNote_2.jpg" ; height = 300; width = 250; }	GreenNote_2 ;
+bitmap {filename="Stim/GreenNote_3.jpg" ; height = 300; width = 250; }	GreenNote_3 ;
+bitmap {filename="Stim/GreenPlane_1.jpg" ; height = 300; width = 250; }	GreenPlane_1 ;
+bitmap {filename="Stim/GreenPlane_2.jpg" ; height = 300; width = 250; }	GreenPlane_2 ;
+bitmap {filename="Stim/GreenPlane_3.jpg" ; height = 300; width = 250; }	GreenPlane_3 ;
+bitmap {filename="Stim/GreenShoe_1.jpg" ; height = 300; width = 250; }	GreenShoe_1 ;
+bitmap {filename="Stim/GreenShoe_2.jpg" ; height = 300; width = 250; }	GreenShoe_2 ;
+bitmap {filename="Stim/GreenShoe_3.jpg" ; height = 300; width = 250; }	GreenShoe_3 ;
+bitmap {filename="Stim/GreenSquare_1.jpg" ; height = 300; width = 250; }	GreenSquare_1 ;
+bitmap {filename="Stim/GreenSquare_2.jpg" ; height = 300; width = 250; }	GreenSquare_2 ;
+bitmap {filename="Stim/GreenSquare_3.jpg" ; height = 300; width = 250; }	GreenSquare_3 ;
+bitmap {filename="Stim/GreenStar_1.jpg" ; height = 300; width = 250; }	GreenStar_1 ;
+bitmap {filename="Stim/GreenStar_2.jpg" ; height = 300; width = 250; }	GreenStar_2 ;
+bitmap {filename="Stim/GreenStar_3.jpg" ; height = 300; width = 250; }	GreenStar_3 ;
+bitmap {filename="Stim/GreenTree_1.jpg" ; height = 300; width = 250; }	GreenTree_1 ;
+bitmap {filename="Stim/GreenTree_2.jpg" ; height = 300; width = 250; }	GreenTree_2 ;
+bitmap {filename="Stim/GreenTree_3.jpg" ; height = 300; width = 250; }	GreenTree_3 ;
+bitmap {filename="Stim/PinkBag_1.jpg" ; height = 300; width = 250; }	PinkBag_1 ;
+bitmap {filename="Stim/PinkBag_2.jpg" ; height = 300; width = 250; }	PinkBag_2 ;
+bitmap {filename="Stim/PinkBag_3.jpg" ; height = 300; width = 250; }	PinkBag_3 ;
+bitmap {filename="Stim/PinkBell_1.jpg" ; height = 300; width = 250; }	PinkBell_1 ;
+bitmap {filename="Stim/PinkBell_2.jpg" ; height = 300; width = 250; }	PinkBell_2 ;
+bitmap {filename="Stim/PinkBell_3.jpg" ; height = 300; width = 250; }	PinkBell_3 ;
+bitmap {filename="Stim/PinkBoat_1.jpg" ; height = 300; width = 250; }	PinkBoat_1 ;
+bitmap {filename="Stim/PinkBoat_2.jpg" ; height = 300; width = 250; }	PinkBoat_2 ;
+bitmap {filename="Stim/PinkBoat_3.jpg" ; height = 300; width = 250; }	PinkBoat_3 ;
+bitmap {filename="Stim/PinkBone_1.jpg" ; height = 300; width = 250; }	PinkBone_1 ;
+bitmap {filename="Stim/PinkBone_2.jpg" ; height = 300; width = 250; }	PinkBone_2 ;
+bitmap {filename="Stim/PinkBone_3.jpg" ; height = 300; width = 250; }	PinkBone_3 ;
+bitmap {filename="Stim/PinkBow_1.jpg" ; height = 300; width = 250; }	PinkBow_1 ;
+bitmap {filename="Stim/PinkBow_2.jpg" ; height = 300; width = 250; }	PinkBow_2 ;
+bitmap {filename="Stim/PinkBow_3.jpg" ; height = 300; width = 250; }	PinkBow_3 ;
+bitmap {filename="Stim/PinkCane_1.jpg" ; height = 300; width = 250; }	PinkCane_1 ;
+bitmap {filename="Stim/PinkCane_2.jpg" ; height = 300; width = 250; }	PinkCane_2 ;
+bitmap {filename="Stim/PinkCane_3.jpg" ; height = 300; width = 250; }	PinkCane_3 ;
+bitmap {filename="Stim/PinkCar_1.jpg" ; height = 300; width = 250; }	PinkCar_1 ;
+bitmap {filename="Stim/PinkCar_2.jpg" ; height = 300; width = 250; }	PinkCar_2 ;
+bitmap {filename="Stim/PinkCar_3.jpg" ; height = 300; width = 250; }	PinkCar_3 ;
+bitmap {filename="Stim/PinkCross_1.jpg" ; height = 300; width = 250; }	PinkCross_1 ;
+bitmap {filename="Stim/PinkCross_2.jpg" ; height = 300; width = 250; }	PinkCross_2 ;
+bitmap {filename="Stim/PinkCross_3.jpg" ; height = 300; width = 250; }	PinkCross_3 ;
+bitmap {filename="Stim/PinkCup_1.jpg" ; height = 300; width = 250; }	PinkCup_1 ;
+bitmap {filename="Stim/PinkCup_2.jpg" ; height = 300; width = 250; }	PinkCup_2 ;
+bitmap {filename="Stim/PinkCup_3.jpg" ; height = 300; width = 250; }	PinkCup_3 ;
+bitmap {filename="Stim/PinkDisc_1.jpg" ; height = 300; width = 250; }	PinkDisc_1 ;
+bitmap {filename="Stim/PinkDisc_2.jpg" ; height = 300; width = 250; }	PinkDisc_2 ;
+bitmap {filename="Stim/PinkDisc_3.jpg" ; height = 300; width = 250; }	PinkDisc_3 ;
+bitmap {filename="Stim/PinkFlag_1.jpg" ; height = 300; width = 250; }	PinkFlag_1 ;
+bitmap {filename="Stim/PinkFlag_2.jpg" ; height = 300; width = 250; }	PinkFlag_2 ;
+bitmap {filename="Stim/PinkFlag_3.jpg" ; height = 300; width = 250; }	PinkFlag_3 ;
+bitmap {filename="Stim/PinkFork_1.jpg" ; height = 300; width = 250; }	PinkFork_1 ;
+bitmap {filename="Stim/PinkFork_2.jpg" ; height = 300; width = 250; }	PinkFork_2 ;
+bitmap {filename="Stim/PinkFork_3.jpg" ; height = 300; width = 250; }	PinkFork_3 ;
+bitmap {filename="Stim/PinkHand_1.jpg" ; height = 300; width = 250; }	PinkHand_1 ;
+bitmap {filename="Stim/PinkHand_2.jpg" ; height = 300; width = 250; }	PinkHand_2 ;
+bitmap {filename="Stim/PinkHand_3.jpg" ; height = 300; width = 250; }	PinkHand_3 ;
+bitmap {filename="Stim/PinkHeart_1.jpg" ; height = 300; width = 250; }	PinkHeart_1 ;
+bitmap {filename="Stim/PinkHeart_2.jpg" ; height = 300; width = 250; }	PinkHeart_2 ;
+bitmap {filename="Stim/PinkHeart_3.jpg" ; height = 300; width = 250; }	PinkHeart_3 ;
+bitmap {filename="Stim/PinkHouse_1.jpg" ; height = 300; width = 250; }	PinkHouse_1 ;
+bitmap {filename="Stim/PinkHouse_2.jpg" ; height = 300; width = 250; }	PinkHouse_2 ;
+bitmap {filename="Stim/PinkHouse_3.jpg" ; height = 300; width = 250; }	PinkHouse_3 ;
+bitmap {filename="Stim/PinkKey_1.jpg" ; height = 300; width = 250; }	PinkKey_1 ;
+bitmap {filename="Stim/PinkKey_2.jpg" ; height = 300; width = 250; }	PinkKey_2 ;
+bitmap {filename="Stim/PinkKey_3.jpg" ; height = 300; width = 250; }	PinkKey_3 ;
+bitmap {filename="Stim/PinkLamp_1.jpg" ; height = 300; width = 250; }	PinkLamp_1 ;
+bitmap {filename="Stim/PinkLamp_2.jpg" ; height = 300; width = 250; }	PinkLamp_2 ;
+bitmap {filename="Stim/PinkLamp_3.jpg" ; height = 300; width = 250; }	PinkLamp_3 ;
+bitmap {filename="Stim/PinkLeaf_1.jpg" ; height = 300; width = 250; }	PinkLeaf_1 ;
+bitmap {filename="Stim/PinkLeaf_2.jpg" ; height = 300; width = 250; }	PinkLeaf_2 ;
+bitmap {filename="Stim/PinkLeaf_3.jpg" ; height = 300; width = 250; }	PinkLeaf_3 ;
+bitmap {filename="Stim/PinkLock_1.jpg" ; height = 300; width = 250; }	PinkLock_1 ;
+bitmap {filename="Stim/PinkLock_2.jpg" ; height = 300; width = 250; }	PinkLock_2 ;
+bitmap {filename="Stim/PinkLock_3.jpg" ; height = 300; width = 250; }	PinkLock_3 ;
+bitmap {filename="Stim/PinkNote_1.jpg" ; height = 300; width = 250; }	PinkNote_1 ;
+bitmap {filename="Stim/PinkNote_2.jpg" ; height = 300; width = 250; }	PinkNote_2 ;
+bitmap {filename="Stim/PinkNote_3.jpg" ; height = 300; width = 250; }	PinkNote_3 ;
+bitmap {filename="Stim/PinkPlane_1.jpg" ; height = 300; width = 250; }	PinkPlane_1 ;
+bitmap {filename="Stim/PinkPlane_2.jpg" ; height = 300; width = 250; }	PinkPlane_2 ;
+bitmap {filename="Stim/PinkPlane_3.jpg" ; height = 300; width = 250; }	PinkPlane_3 ;
+bitmap {filename="Stim/PinkShoe_1.jpg" ; height = 300; width = 250; }	PinkShoe_1 ;
+bitmap {filename="Stim/PinkShoe_2.jpg" ; height = 300; width = 250; }	PinkShoe_2 ;
+bitmap {filename="Stim/PinkShoe_3.jpg" ; height = 300; width = 250; }	PinkShoe_3 ;
+bitmap {filename="Stim/PinkSquare_1.jpg" ; height = 300; width = 250; }	PinkSquare_1 ;
+bitmap {filename="Stim/PinkSquare_2.jpg" ; height = 300; width = 250; }	PinkSquare_2 ;
+bitmap {filename="Stim/PinkSquare_3.jpg" ; height = 300; width = 250; }	PinkSquare_3 ;
+bitmap {filename="Stim/PinkStar_1.jpg" ; height = 300; width = 250; }	PinkStar_1 ;
+bitmap {filename="Stim/PinkStar_2.jpg" ; height = 300; width = 250; }	PinkStar_2 ;
+bitmap {filename="Stim/PinkStar_3.jpg" ; height = 300; width = 250; }	PinkStar_3 ;
+bitmap {filename="Stim/PinkTree_1.jpg" ; height = 300; width = 250; }	PinkTree_1 ;
+bitmap {filename="Stim/PinkTree_2.jpg" ; height = 300; width = 250; }	PinkTree_2 ;
+bitmap {filename="Stim/PinkTree_3.jpg" ; height = 300; width = 250; }	PinkTree_3 ;
+bitmap {filename="Stim/RedBag_1.jpg" ; height = 300; width = 250; }	RedBag_1 ;
+bitmap {filename="Stim/RedBag_2.jpg" ; height = 300; width = 250; }	RedBag_2 ;
+bitmap {filename="Stim/RedBag_3.jpg" ; height = 300; width = 250; }	RedBag_3 ;
+bitmap {filename="Stim/RedBell_1.jpg" ; height = 300; width = 250; }	RedBell_1 ;
+bitmap {filename="Stim/RedBell_2.jpg" ; height = 300; width = 250; }	RedBell_2 ;
+bitmap {filename="Stim/RedBell_3.jpg" ; height = 300; width = 250; }	RedBell_3 ;
+bitmap {filename="Stim/RedBoat_1.jpg" ; height = 300; width = 250; }	RedBoat_1 ;
+bitmap {filename="Stim/RedBoat_2.jpg" ; height = 300; width = 250; }	RedBoat_2 ;
+bitmap {filename="Stim/RedBoat_3.jpg" ; height = 300; width = 250; }	RedBoat_3 ;
+bitmap {filename="Stim/RedBone_1.jpg" ; height = 300; width = 250; }	RedBone_1 ;
+bitmap {filename="Stim/RedBone_2.jpg" ; height = 300; width = 250; }	RedBone_2 ;
+bitmap {filename="Stim/RedBone_3.jpg" ; height = 300; width = 250; }	RedBone_3 ;
+bitmap {filename="Stim/RedBow_1.jpg" ; height = 300; width = 250; }	RedBow_1 ;
+bitmap {filename="Stim/RedBow_2.jpg" ; height = 300; width = 250; }	RedBow_2 ;
+bitmap {filename="Stim/RedBow_3.jpg" ; height = 300; width = 250; }	RedBow_3 ;
+bitmap {filename="Stim/RedCane_1.jpg" ; height = 300; width = 250; }	RedCane_1 ;
+bitmap {filename="Stim/RedCane_2.jpg" ; height = 300; width = 250; }	RedCane_2 ;
+bitmap {filename="Stim/RedCane_3.jpg" ; height = 300; width = 250; }	RedCane_3 ;
+bitmap {filename="Stim/RedCar_1.jpg" ; height = 300; width = 250; }	RedCar_1 ;
+bitmap {filename="Stim/RedCar_2.jpg" ; height = 300; width = 250; }	RedCar_2 ;
+bitmap {filename="Stim/RedCar_3.jpg" ; height = 300; width = 250; }	RedCar_3 ;
+bitmap {filename="Stim/RedCross_1.jpg" ; height = 300; width = 250; }	RedCross_1 ;
+bitmap {filename="Stim/RedCross_2.jpg" ; height = 300; width = 250; }	RedCross_2 ;
+bitmap {filename="Stim/RedCross_3.jpg" ; height = 300; width = 250; }	RedCross_3 ;
+bitmap {filename="Stim/RedCup_1.jpg" ; height = 300; width = 250; }	RedCup_1 ;
+bitmap {filename="Stim/RedCup_2.jpg" ; height = 300; width = 250; }	RedCup_2 ;
+bitmap {filename="Stim/RedCup_3.jpg" ; height = 300; width = 250; }	RedCup_3 ;
+bitmap {filename="Stim/RedDisc_1.jpg" ; height = 300; width = 250; }	RedDisc_1 ;
+bitmap {filename="Stim/RedDisc_2.jpg" ; height = 300; width = 250; }	RedDisc_2 ;
+bitmap {filename="Stim/RedDisc_3.jpg" ; height = 300; width = 250; }	RedDisc_3 ;
+bitmap {filename="Stim/RedFlag_1.jpg" ; height = 300; width = 250; }	RedFlag_1 ;
+bitmap {filename="Stim/RedFlag_2.jpg" ; height = 300; width = 250; }	RedFlag_2 ;
+bitmap {filename="Stim/RedFlag_3.jpg" ; height = 300; width = 250; }	RedFlag_3 ;
+bitmap {filename="Stim/RedFork_1.jpg" ; height = 300; width = 250; }	RedFork_1 ;
+bitmap {filename="Stim/RedFork_2.jpg" ; height = 300; width = 250; }	RedFork_2 ;
+bitmap {filename="Stim/RedFork_3.jpg" ; height = 300; width = 250; }	RedFork_3 ;
+bitmap {filename="Stim/RedHand_1.jpg" ; height = 300; width = 250; }	RedHand_1 ;
+bitmap {filename="Stim/RedHand_2.jpg" ; height = 300; width = 250; }	RedHand_2 ;
+bitmap {filename="Stim/RedHand_3.jpg" ; height = 300; width = 250; }	RedHand_3 ;
+bitmap {filename="Stim/RedHeart_1.jpg" ; height = 300; width = 250; }	RedHeart_1 ;
+bitmap {filename="Stim/RedHeart_2.jpg" ; height = 300; width = 250; }	RedHeart_2 ;
+bitmap {filename="Stim/RedHeart_3.jpg" ; height = 300; width = 250; }	RedHeart_3 ;
+bitmap {filename="Stim/RedHouse_1.jpg" ; height = 300; width = 250; }	RedHouse_1 ;
+bitmap {filename="Stim/RedHouse_2.jpg" ; height = 300; width = 250; }	RedHouse_2 ;
+bitmap {filename="Stim/RedHouse_3.jpg" ; height = 300; width = 250; }	RedHouse_3 ;
+bitmap {filename="Stim/RedKey_1.jpg" ; height = 300; width = 250; }	RedKey_1 ;
+bitmap {filename="Stim/RedKey_2.jpg" ; height = 300; width = 250; }	RedKey_2 ;
+bitmap {filename="Stim/RedKey_3.jpg" ; height = 300; width = 250; }	RedKey_3 ;
+bitmap {filename="Stim/RedLamp_1.jpg" ; height = 300; width = 250; }	RedLamp_1 ;
+bitmap {filename="Stim/RedLamp_2.jpg" ; height = 300; width = 250; }	RedLamp_2 ;
+bitmap {filename="Stim/RedLamp_3.jpg" ; height = 300; width = 250; }	RedLamp_3 ;
+bitmap {filename="Stim/RedLeaf_1.jpg" ; height = 300; width = 250; }	RedLeaf_1 ;
+bitmap {filename="Stim/RedLeaf_2.jpg" ; height = 300; width = 250; }	RedLeaf_2 ;
+bitmap {filename="Stim/RedLeaf_3.jpg" ; height = 300; width = 250; }	RedLeaf_3 ;
+bitmap {filename="Stim/RedLock_1.jpg" ; height = 300; width = 250; }	RedLock_1 ;
+bitmap {filename="Stim/RedLock_2.jpg" ; height = 300; width = 250; }	RedLock_2 ;
+bitmap {filename="Stim/RedLock_3.jpg" ; height = 300; width = 250; }	RedLock_3 ;
+bitmap {filename="Stim/RedNote_1.jpg" ; height = 300; width = 250; }	RedNote_1 ;
+bitmap {filename="Stim/RedNote_2.jpg" ; height = 300; width = 250; }	RedNote_2 ;
+bitmap {filename="Stim/RedNote_3.jpg" ; height = 300; width = 250; }	RedNote_3 ;
+bitmap {filename="Stim/RedPlane_1.jpg" ; height = 300; width = 250; }	RedPlane_1 ;
+bitmap {filename="Stim/RedPlane_2.jpg" ; height = 300; width = 250; }	RedPlane_2 ;
+bitmap {filename="Stim/RedPlane_3.jpg" ; height = 300; width = 250; }	RedPlane_3 ;
+bitmap {filename="Stim/RedShoe_1.jpg" ; height = 300; width = 250; }	RedShoe_1 ;
+bitmap {filename="Stim/RedShoe_2.jpg" ; height = 300; width = 250; }	RedShoe_2 ;
+bitmap {filename="Stim/RedShoe_3.jpg" ; height = 300; width = 250; }	RedShoe_3 ;
+bitmap {filename="Stim/RedSquare_1.jpg" ; height = 300; width = 250; }	RedSquare_1 ;
+bitmap {filename="Stim/RedSquare_2.jpg" ; height = 300; width = 250; }	RedSquare_2 ;
+bitmap {filename="Stim/RedSquare_3.jpg" ; height = 300; width = 250; }	RedSquare_3 ;
+bitmap {filename="Stim/RedStar_1.jpg" ; height = 300; width = 250; }	RedStar_1 ;
+bitmap {filename="Stim/RedStar_2.jpg" ; height = 300; width = 250; }	RedStar_2 ;
+bitmap {filename="Stim/RedStar_3.jpg" ; height = 300; width = 250; }	RedStar_3 ;
+bitmap {filename="Stim/RedTree_1.jpg" ; height = 300; width = 250; }	RedTree_1 ;
+bitmap {filename="Stim/RedTree_2.jpg" ; height = 300; width = 250; }	RedTree_2 ;
+bitmap {filename="Stim/RedTree_3.jpg" ; height = 300; width = 250; }	RedTree_3 ;
+
+#####################################################################
+######################### TRIALS START NOW  #########################
+#####################################################################
+
+
+#### WELCOME SCREEN #### Wait for recording to start
+trial {trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture welcome_pic; code = "welcome_pic";};
+
+### INSTRUCTIONS ###
+# Press left button to read
+trial {trial_type = specific_response; terminator_button = 1;trial_duration = forever; picture instruct1_pic; code = "instructions1";};
+# You will read words on screen, judge match/mismatch
+trial {trial_type = specific_response; terminator_button = 1;trial_duration = forever; picture instruct2_pic; code = "instructions2";};
+# There will be 2 types of blocks
+trial {trial_type = specific_response; terminator_button = 1;trial_duration = forever; picture instruct3_pic; code = "instructions3";};
+# In List Blocks...
+trial {trial_type = specific_response; terminator_button = 1;trial_duration = forever; picture instruct4_pic; code = "instructions4";};
+# In Phrase Blocks...
+trial {trial_type = specific_response; terminator_button = 1;trial_duration = forever; picture instruct5_pic; code = "instructions5";};
+# Response buttons
+trial {trial_type = specific_response; terminator_button = 1;trial_duration = forever; picture instruct6_pic; code = "instructions6";};
+# Intro practice
+trial {trial_type = specific_response; terminator_button = 1;trial_duration = forever; picture instruct7_pic; code = "instructions7";};
+
+#####################################################################
+################### BEGIN THE PRACTICE TRIALS #######################
+#####################################################################
+
+trial	{trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_block;};
+TEMPLATE "PracticeTrial.tem" randomize {
+jitter word1	word2	picture1	cor;
+400 xkq lamp  PinkLamp_2	Match;
+300 wvcnz disc  BlackCross_1	NoMatch;
+500 mtpv  key RedKey_1	Match;
+200 qxsw  boat  BrownFlag_3	NoMatch;
+600 zbxlv note  BlueNote_1	Match;
+400 brown tree  RedCar_2	NoMatch;
+300 blue  shoe  BlueShoe_2	Match;
+500 pink  hand  GreenLamp_3	NoMatch;
+600 black lock  BlackLock_3	Match;
+200 green heart BrownPlane_1	NoMatch;
+};
+
+trial	{trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_block;};
+TEMPLATE "PracticeTrial.tem" randomize {
+jitter word1	word2	picture1	cor;
+400 xkq lamp  PinkLamp_2 Match;
+300 wvcnz disc  BlackCross_1	NoMatch;
+500 mtpv  key RedKey_1	Match;
+200 qxsw  boat  BrownFlag_1	NoMatch;
+600 zbxlv note  BlueNote_1	Match;
+400 cross tree  RedCar_1	NoMatch;
+300 house shoe  BlueHouse_2	Match;
+500 plane hand  GreenLamp_1	NoMatch;
+600 cup lock  BlackLock_3	Match;
+200 lamp  heart BrownPlane_2	NoMatch;
+};
+
+# End of the practice
+trial {trial_type = specific_response; terminator_button =1; trial_duration = forever; picture end_practice_pic;};
+
+#####################################################################
+################### BEGIN THE MAIN EXPERIMENT #######################
+#####################################################################
+
+#### List BLOCK 1 ####
+trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture firstblock; code ="first_block";};
+# block 1 begin #
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+500 qxsw 1 "qxsw_1word_list" square 2 "Square_1word_list" BluePlane_2;
+300 zbxlv 1 "zbxlv_1word_list" key 2 "Key_1word_list" BrownLamp_1;
+300 cross 4 "Cross_2word_list" bow 8 "Bow_2word_list" GreenBow_3;
+300 wvcnz 1 "wvcnz_1word_list" disc 2 "Disc_1word_list" GreenHand_2;
+400 lamp 4 "Lamp_2word_list" cane 8 "Cane_2word_list" BlueLamp_2;
+200 cup 4 "Cup_2word_list" lock 8 "Lock_2word_list" BlueLock_3;
+600 house 4 "House_2word_list" car 8 "Car_2word_list" GreenHouse_2;
+600 zbxlv 1 "zbxlv_1word_list" hand 2 "Hand_1word_list" BrownBone_1;
+600 zbxlv 1 "zbxlv_1word_list" square 2 "Square_1word_list" BrownCar_1;
+400 cup 4 "Cup_2word_list" bow 8 "Bow_2word_list" RedFork_3;
+300 wvcnz 1 "wvcnz_1word_list" cup 2 "Cup_1word_list" GreenFork_1;
+600 zbxlv 1 "zbxlv_1word_list" lamp 2 "Lamp_1word_list" BrownTree_1;
+500 lamp 4 "Lamp_2word_list" leaf 8 "Leaf_2word_list" GreenFork_2;
+600 lamp 4 "Lamp_2word_list" boat 8 "Boat_2word_list" BrownLamp_3;
+200 xkq 1 "xkq_1word_list" lock 2 "Lock_1word_list" RedLock_2;
+400 mtpv 1 "mtpv_1word_list" shoe 2 "Shoe_1word_list" PinkBell_1;
+400 boat 4 "Boat_2word_list" cross 8 "Cross_2word_list" GreenFork_2;
+400 zbxlv 1 "zbxlv_1word_list" flag 2 "Flag_1word_list" BrownLamp_3;
+200 wvcnz 1 "wvcnz_1word_list" key 2 "Key_1word_list" GreenKey_3;
+500 plane 4 "Plane_2word_list" flag 8 "Flag_2word_list" BrownFlag_1;
+600 boat 4 "Boat_2word_list" leaf 8 "Leaf_2word_list" PinkLeaf_3;
+500 qxsw 1 "qxsw_1word_list" note 2 "Note_1word_list" BlueBag_3;
+400 lamp 4 "Lamp_2word_list" key 8 "Key_2word_list" GreenKey_2;
+400 rjdnv 1 "rjdnv_1word_list" key 2 "Key_1word_list" BlackShoe_2;
+300 boat 4 "Boat_2word_list" lock 8 "Lock_2word_list" BlackHeart_2;
+500 zbxlv 1 "zbxlv_1word_list" tree 2 "Tree_1word_list" BrownTree_1;
+500 cup 4 "Cup_2word_list" star 8 "Star_2word_list" BlackCup_1;
+400 rjdnv 1 "rjdnv_1word_list" tree 2 "Tree_1word_list" BlackStar_2;
+200 cup 4 "Cup_2word_list" disc 8 "Disc_2word_list" BlueCup_2;
+200 plane 4 "Plane_2word_list" fork 8 "Fork_2word_list" RedPlane_1;
+500 mtpv 1 "mtpv_1word_list" leaf 2 "Leaf_1word_list" PinkShoe_2;
+300 rjdnv 1 "rjdnv_1word_list" bag 2 "Bag_1word_list" BlackHeart_3;
+500 cross 4 "Cross_2word_list" lamp 8 "Lamp_2word_list" PinkCross_2;
+500 xkq 1 "xkq_1word_list" bow 2 "Bow_1word_list" RedFork_1;
+300 xkq 1 "xkq_1word_list" plane 2 "Plane_1word_list" RedPlane_3;
+300 cross 4 "Cross_2word_list" disc 8 "Disc_2word_list" BrownFlag_3;
+400 zbxlv 1 "zbxlv_1word_list" cane 2 "Cane_1word_list" BrownBell_2;
+600 xkq 1 "xkq_1word_list" car 2 "Car_1word_list" RedCar_2;
+200 house 4 "House_2word_list" plane 8 "Plane_2word_list" PinkBell_3;
+200 xkq 1 "xkq_1word_list" bell 2 "Bell_1word_list" RedBell_2;
+600 plane 4 "Plane_2word_list" cup 8 "Cup_2word_list" GreenCup_2;
+300 plane 4 "Plane_2word_list" shoe 8 "Shoe_2word_list" BrownBoat_3;
+200 boat 4 "Boat_2word_list" cup 8 "Cup_2word_list" RedBoat_2;
+500 rjdnv 1 "rjdnv_1word_list" hand 2 "Hand_1word_list" BlackHand_2;
+200 cup 4 "Cup_2word_list" lock 8 "Lock_2word_list" GreenCup_1;
+600 rjdnv 1 "rjdnv_1word_list" cross 2 "Cross_1word_list" BlackCross_2;
+200 cross 4 "Cross_2word_list" bow 8 "Bow_2word_list" BlackBag_3;
+600 lamp 4 "Lamp_2word_list" square 8 "Square_2word_list" BrownSquare_2;
+300 house 4 "House_2word_list" bag 8 "Bag_2word_list" PinkLock_1;
+400 qxsw 1 "qxsw_1word_list" cross 2 "Cross_1word_list" BluePlane_2;
+};
+
+#### Phrase BLOCK 1 ####
+
+trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
+# block 1 begin #
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+200 rjdnv 16 "rjdnv_1word_comp" shoe 32 "Shoe_1word_comp" BlackBow_2;
+200 mtpv 16 "mtpv_1word_comp" tree 32 "Tree_1word_comp" PinkTree_3;
+500 red 64 "Red_2word_comp" disc 128 "Disc_2word_comp" GreenDisc_3;
+600 blue 64 "Blue_2word_comp" lamp 128 "Lamp_2word_comp" GreenLamp_1;
+300 green 64 "Green_2word_comp" bell 128 "Bell_2word_comp" GreenBell_3;
+500 rjdnv 16 "rjdnv_1word_comp" cross 32 "Cross_1word_comp" BlackCross_3;
+600 wvcnz 16 "wvcnz_1word_comp" bell 32 "Bell_1word_comp" GreenBell_1;
+200 red 64 "Red_2word_comp" star 128 "Star_2word_comp" RedFork_2;
+600 red 64 "Red_2word_comp" heart 128 "Heart_2word_comp" PinkHeart_3;
+300 mtpv 16 "mtpv_1word_comp" boat 32 "Boat_1word_comp" PinkHeart_2;
+300 brown 64 "Brown_2word_comp" lamp 128 "Lamp_2word_comp" BrownNote_3;
+300 rjdnv 16 "rjdnv_1word_comp" star 32 "Star_1word_comp" BlackStar_1;
+600 qxsw 16 "qxsw_1word_comp" bag 32 "Bag_1word_comp" BlueBag_1;
+300 wvcnz 16 "wvcnz_1word_comp" leaf 32 "Leaf_1word_comp" GreenLeaf_1;
+500 pink 64 "Pink_2word_comp" key 128 "Key_2word_comp" PinkKey_2;
+200 pink 64 "Pink_2word_comp" shoe 128 "Shoe_2word_comp" PinkSquare_1;
+400 qxsw 16 "qxsw_1word_comp" heart 32 "Heart_1word_comp" BlueHeart_2;
+400 mtpv 16 "mtpv_1word_comp" cane 32 "Cane_1word_comp" PinkCane_3;
+400 blue 64 "Blue_2word_comp" car 128 "Car_2word_comp" GreenCar_2;
+500 brown 64 "Brown_2word_comp" key 128 "Key_2word_comp" PinkKey_3;
+200 mtpv 16 "mtpv_1word_comp" leaf 32 "Leaf_1word_comp" PinkBone_2;
+400 zbxlv 16 "zbxlv_1word_comp" flag 32 "Flag_1word_comp" BrownNote_3;
+500 mtpv 16 "mtpv_1word_comp" fork 32 "Fork_1word_comp" PinkFork_1;
+500 brown 64 "Brown_2word_comp" car 128 "Car_2word_comp" BrownCar_1;
+500 pink 64 "Pink_2word_comp" tree 128 "Tree_2word_comp" PinkTree_2;
+200 xkq 16 "xkq_1word_comp" plane 32 "Plane_1word_comp" RedPlane_1;
+300 red 64 "Red_2word_comp" fork 128 "Fork_2word_comp" RedBow_3;
+300 wvcnz 16 "wvcnz_1word_comp" house 32 "House_1word_comp" GreenCane_1;
+400 rjdnv 16 "rjdnv_1word_comp" heart 32 "Heart_1word_comp" BlackShoe_1;
+300 pink 64 "Pink_2word_comp" lock 128 "Lock_2word_comp" BlueLock_3;
+600 qxsw 16 "qxsw_1word_comp" leaf 32 "Leaf_1word_comp" BlueLeaf_1;
+500 brown 64 "Brown_2word_comp" note 128 "Note_2word_comp" BrownNote_2;
+300 red 64 "Red_2word_comp" bow 128 "Bow_2word_comp" RedCar_1;
+500 zbxlv 16 "zbxlv_1word_comp" hand 32 "Hand_1word_comp" BrownBag_2;
+600 blue 64 "Blue_2word_comp" note 128 "Note_2word_comp" BrownNote_2;
+300 pink 64 "Pink_2word_comp" note 128 "Note_2word_comp" PinkNote_1;
+400 xkq 16 "xkq_1word_comp" fork 32 "Fork_1word_comp" RedDisc_3;
+400 green 64 "Green_2word_comp" car 128 "Car_2word_comp" GreenHand_2;
+600 pink 64 "Pink_2word_comp" leaf 128 "Leaf_2word_comp" PinkHouse_2;
+200 rjdnv 16 "rjdnv_1word_comp" tree 32 "Tree_1word_comp" BlackFlag_3;
+600 rjdnv 16 "rjdnv_1word_comp" key 32 "Key_1word_comp" BlackHeart_2;
+600 blue 64 "Blue_2word_comp" square 128 "Square_2word_comp" BrownSquare_3;
+200 qxsw 16 "qxsw_1word_comp" house 32 "House_1word_comp" BlueHouse_2;
+400 pink 64 "Pink_2word_comp" leaf 128 "Leaf_2word_comp" GreenLeaf_3;
+200 mtpv 16 "mtpv_1word_comp" lock 32 "Lock_1word_comp" PinkTree_2;
+400 zbxlv 16 "zbxlv_1word_comp" key 32 "Key_1word_comp" BrownNote_3;
+200 qxsw 16 "qxsw_1word_comp" cross 32 "Cross_1word_comp" BluePlane_1;
+400 black 64 "Black_2word_comp" star 128 "Star_2word_comp" BlackStar_3;
+600 blue 64 "Blue_2word_comp" disc 128 "Disc_2word_comp" BlueDisc_3;
+500 red 64 "Red_2word_comp" plane 128 "Plane_2word_comp" RedPlane_1;
+};
+
+#### LIST BLOCK 2 ####
+trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_break; code ="list_break";};
+# block 1 begin #
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+400 zbxlv 1 "zbxlv_1word_list" car 2 "Car_1word_list" BrownCar_3;
+500 cross 4 "Cross_2word_list" star 8 "Star_2word_list" GreenStar_1;
+600 rjdnv 1 "rjdnv_1word_list" cross 2 "Cross_1word_list" BlackCross_3;
+600 cup 4 "Cup_2word_list" bell 8 "Bell_2word_list" BlueCup_2;
+500 rjdnv 1 "rjdnv_1word_list" tree 2 "Tree_1word_list" BlackFlag_3;
+300 zbxlv 1 "zbxlv_1word_list" plane 2 "Plane_1word_list" BrownCar_1;
+500 boat 4 "Boat_2word_list" heart 8 "Heart_2word_list" RedBoat_1;
+600 zbxlv 1 "zbxlv_1word_list" square 2 "Square_1word_list" BrownSquare_3;
+300 house 4 "House_2word_list" bell 8 "Bell_2word_list" PinkTree_1;
+500 house 4 "House_2word_list" boat 8 "Boat_2word_list" RedBoat_2;
+300 plane 4 "Plane_2word_list" bag 8 "Bag_2word_list" GreenLamp_2;
+300 wvcnz 1 "wvcnz_1word_list" star 2 "Star_1word_list" GreenStar_3;
+600 boat 4 "Boat_2word_list" hand 8 "Hand_2word_list" BrownBoat_1;
+600 qxsw 1 "qxsw_1word_list" plane 2 "Plane_1word_list" BlueHouse_2;
+200 lamp 4 "Lamp_2word_list" shoe 8 "Shoe_2word_list" GreenLeaf_3;
+400 rjdnv 1 "rjdnv_1word_list" heart 2 "Heart_1word_list" BlackBone_2;
+200 mtpv 1 "mtpv_1word_list" lock 2 "Lock_1word_list" PinkKey_2;
+200 mtpv 1 "mtpv_1word_list" heart 2 "Heart_1word_list" PinkHeart_2;
+200 plane 4 "Plane_2word_list" cross 8 "Cross_2word_list" BluePlane_3;
+400 zbxlv 1 "zbxlv_1word_list" bag 2 "Bag_1word_list" BrownBag_3;
+300 boat 4 "Boat_2word_list" note 8 "Note_2word_list" BluePlane_3;
+300 wvcnz 1 "wvcnz_1word_list" bow 2 "Bow_1word_list" GreenHand_1;
+300 house 4 "House_2word_list" shoe 8 "Shoe_2word_list" GreenHouse_2;
+500 wvcnz 1 "wvcnz_1word_list" lamp 2 "Lamp_1word_list" GreenLamp_3;
+600 zbxlv 1 "zbxlv_1word_list" boat 2 "Boat_1word_list" BrownBoat_3;
+500 lamp 4 "Lamp_2word_list" house 8 "House_2word_list" PinkLock_3;
+600 wvcnz 1 "wvcnz_1word_list" cane 2 "Cane_1word_list" GreenHouse_2;
+600 house 4 "House_2word_list" cane 8 "Cane_2word_list" BrownTree_2;
+400 cup 4 "Cup_2word_list" plane 8 "Plane_2word_list" BlueCup_1;
+300 plane 4 "Plane_2word_list" bone 8 "Bone_2word_list" BlueNote_1;
+200 qxsw 1 "qxsw_1word_list" cup 2 "Cup_1word_list" BlueCross_1;
+400 cross 4 "Cross_2word_list" cane 8 "Cane_2word_list" BlueCar_1;
+400 cross 4 "Cross_2word_list" hand 8 "Hand_2word_list" BrownBell_3;
+500 zbxlv 1 "zbxlv_1word_list" bag 2 "Bag_1word_list" BrownCane_1;
+400 mtpv 1 "mtpv_1word_list" key 2 "Key_1word_list" PinkKey_1;
+400 wvcnz 1 "wvcnz_1word_list" leaf 2 "Leaf_1word_list" GreenLeaf_3;
+300 house 4 "House_2word_list" tree 8 "Tree_2word_list" PinkTree_3;
+500 rjdnv 1 "rjdnv_1word_list" fork 2 "Fork_1word_list" BlackFork_2;
+400 boat 4 "Boat_2word_list" lamp 8 "Lamp_2word_list" GreenDisc_3;
+200 qxsw 1 "qxsw_1word_list" flag 2 "Flag_1word_list" BlueFlag_3;
+300 cross 4 "Cross_2word_list" cup 8 "Cup_2word_list" PinkFork_2;
+600 cup 4 "Cup_2word_list" plane 8 "Plane_2word_list" BluePlane_2;
+600 lamp 4 "Lamp_2word_list" lock 8 "Lock_2word_list" BrownBell_2;
+200 zbxlv 1 "zbxlv_1word_list" lamp 2 "Lamp_1word_list" BrownLamp_2;
+200 rjdnv 1 "rjdnv_1word_list" bone 2 "Bone_1word_list" BlackFlag_3;
+500 zbxlv 1 "zbxlv_1word_list" flag 2 "Flag_1word_list" BrownBoat_3;
+200 boat 4 "Boat_2word_list" flag 8 "Flag_2word_list" PinkBoat_2;
+200 cup 4 "Cup_2word_list" disc 8 "Disc_2word_list" RedFork_1;
+500 xkq 1 "xkq_1word_list" disc 2 "Disc_1word_list" RedCane_1;
+400 boat 4 "Boat_2word_list" plane 8 "Plane_2word_list" BrownBone_1;
+};
+
+#### Composition BLOCK 2 ####
+trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
+# block 1 begin #
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+300 green 64 "Green_2word_comp" bow 128 "Bow_2word_comp" GreenBow_2;
+500 qxsw 16 "qxsw_1word_comp" cup 32 "Cup_1word_comp" BlueCup_2;
+300 mtpv 16 "mtpv_1word_comp" bone 32 "Bone_1word_comp" PinkBone_3;
+400 red 64 "Red_2word_comp" bell 128 "Bell_2word_comp" RedBell_3;
+500 blue 64 "Blue_2word_comp" plane 128 "Plane_2word_comp" BlueDisc_3;
+400 wvcnz 16 "wvcnz_1word_comp" lamp 32 "Lamp_1word_comp" GreenLamp_1;
+600 pink 64 "Pink_2word_comp" bone 128 "Bone_2word_comp" PinkBone_2;
+200 zbxlv 16 "zbxlv_1word_comp" bag 32 "Bag_1word_comp" BrownBell_1;
+200 wvcnz 16 "wvcnz_1word_comp" fork 32 "Fork_1word_comp" GreenLamp_3;
+200 blue 64 "Blue_2word_comp" cup 128 "Cup_2word_comp" BlueCup_2;
+300 qxsw 16 "qxsw_1word_comp" plane 32 "Plane_1word_comp" BlueSquare_2;
+500 mtpv 16 "mtpv_1word_comp" house 32 "House_1word_comp" PinkLeaf_1;
+500 xkq 16 "xkq_1word_comp" disc 32 "Disc_1word_comp" RedDisc_3;
+400 blue 64 "Blue_2word_comp" flag 128 "Flag_2word_comp" BlueFlag_2;
+600 blue 64 "Blue_2word_comp" hand 128 "Hand_2word_comp" BlueHand_2;
+500 pink 64 "Pink_2word_comp" boat 128 "Boat_2word_comp" PinkKey_2;
+300 mtpv 16 "mtpv_1word_comp" note 32 "Note_1word_comp" PinkNote_1;
+500 green 64 "Green_2word_comp" house 128 "House_2word_comp" GreenHouse_1;
+400 rjdnv 16 "rjdnv_1word_comp" flag 32 "Flag_1word_comp" BlackFlag_1;
+300 rjdnv 16 "rjdnv_1word_comp" bone 32 "Bone_1word_comp" BlackTree_2;
+600 red 64 "Red_2word_comp" cane 128 "Cane_2word_comp" RedCane_3;
+600 rjdnv 16 "rjdnv_1word_comp" cup 32 "Cup_1word_comp" BlackCup_3;
+200 black 64 "Black_2word_comp" bone 128 "Bone_2word_comp" PinkBone_2;
+300 zbxlv 16 "zbxlv_1word_comp" note 32 "Note_1word_comp" BrownNote_2;
+500 blue 64 "Blue_2word_comp" lock 128 "Lock_2word_comp" BlueCar_2;
+300 pink 64 "Pink_2word_comp" square 128 "Square_2word_comp" PinkSquare_3;
+600 xkq 16 "xkq_1word_comp" lock 32 "Lock_1word_comp" RedLock_1;
+200 pink 64 "Pink_2word_comp" cane 128 "Cane_2word_comp" PinkCane_2;
+200 black 64 "Black_2word_comp" bag 128 "Bag_2word_comp" BlueBag_1;
+600 brown 64 "Brown_2word_comp" flag 128 "Flag_2word_comp" BrownKey_3;
+500 wvcnz 16 "wvcnz_1word_comp" disc 32 "Disc_1word_comp" GreenStar_3;
+300 brown 64 "Brown_2word_comp" hand 128 "Hand_2word_comp" BlackHand_2;
+600 zbxlv 16 "zbxlv_1word_comp" boat 32 "Boat_1word_comp" BrownBoat_2;
+300 mtpv 16 "mtpv_1word_comp" shoe 32 "Shoe_1word_comp" PinkLock_1;
+400 xkq 16 "xkq_1word_comp" star 32 "Star_1word_comp" RedBoat_3;
+400 green 64 "Green_2word_comp" star 128 "Star_2word_comp" GreenStar_1;
+200 green 64 "Green_2word_comp" fork 128 "Fork_2word_comp" PinkFork_2;
+300 red 64 "Red_2word_comp" star 128 "Star_2word_comp" BlackStar_3;
+500 xkq 16 "xkq_1word_comp" disc 32 "Disc_1word_comp" RedStar_2;
+200 black 64 "Black_2word_comp" heart 128 "Heart_2word_comp" BlackFork_3;
+400 xkq 16 "xkq_1word_comp" note 32 "Note_1word_comp" RedPlane_2;
+200 brown 64 "Brown_2word_comp" bone 128 "Bone_2word_comp" BrownBone_2;
+400 rjdnv 16 "rjdnv_1word_comp" fork 32 "Fork_1word_comp" BlackFork_1;
+200 qxsw 16 "qxsw_1word_comp" lock 32 "Lock_1word_comp" BlueBag_3;
+500 brown 64 "Brown_2word_comp" plane 128 "Plane_2word_comp" RedPlane_1;
+400 qxsw 16 "qxsw_1word_comp" hand 32 "Hand_1word_comp" BlueHand_2;
+400 zbxlv 16 "zbxlv_1word_comp" bell 32 "Bell_1word_comp" BrownFlag_2;
+600 brown 64 "Brown_2word_comp" bag 128 "Bag_2word_comp" BrownBoat_3;
+600 zbxlv 16 "zbxlv_1word_comp" cane 32 "Cane_1word_comp" BrownBag_2;
+600 black 64 "Black_2word_comp" cup 128 "Cup_2word_comp" BlackCup_1;
+};
+
+#### List BLOCK 3 ####
+
+trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_break; code ="list_break";};
+# block 1 begin #
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+500 cup 4 "Cup_2word_list" cane 8 "Cane_2word_list" PinkCane_3;
+600 mtpv 1 "mtpv_1word_list" fork 2 "Fork_1word_list" PinkFork_2;
+300 house 4 "House_2word_list" note 8 "Note_2word_list" BrownNote_2;
+300 zbxlv 1 "zbxlv_1word_list" boat 2 "Boat_1word_list" BrownBoat_1;
+500 boat 4 "Boat_2word_list" house 8 "House_2word_list" BlueHouse_1;
+300 wvcnz 1 "wvcnz_1word_list" house 2 "House_1word_list" GreenHand_1;
+200 rjdnv 1 "rjdnv_1word_list" shoe 2 "Shoe_1word_list" BlackStar_1;
+600 house 4 "House_2word_list" square 8 "Square_2word_list" BlueHouse_1;
+400 mtpv 1 "mtpv_1word_list" tree 2 "Tree_1word_list" PinkTree_2;
+500 wvcnz 1 "wvcnz_1word_list" bell 2 "Bell_1word_list" GreenBell_2;
+200 lamp 4 "Lamp_2word_list" bell 8 "Bell_2word_list" PinkNote_1;
+300 xkq 1 "xkq_1word_list" heart 2 "Heart_1word_list" RedNote_3;
+400 cross 4 "Cross_2word_list" fork 8 "Fork_2word_list" BlueDisc_1;
+200 qxsw 1 "qxsw_1word_list" lamp 2 "Lamp_1word_list" BlueLock_1;
+300 boat 4 "Boat_2word_list" cup 8 "Cup_2word_list" GreenFork_2;
+500 plane 4 "Plane_2word_list" heart 8 "Heart_2word_list" BrownFlag_3;
+400 wvcnz 1 "wvcnz_1word_list" bow 2 "Bow_1word_list" GreenBow_1;
+200 zbxlv 1 "zbxlv_1word_list" bone 2 "Bone_1word_list" BrownBone_2;
+600 boat 4 "Boat_2word_list" square 8 "Square_2word_list" PinkCane_1;
+300 cup 4 "Cup_2word_list" fork 8 "Fork_2word_list" BlueDisc_3;
+600 mtpv 1 "mtpv_1word_list" cross 2 "Cross_1word_list" PinkHouse_3;
+300 boat 4 "Boat_2word_list" disc 8 "Disc_2word_list" RedDisc_3;
+400 cross 4 "Cross_2word_list" key 8 "Key_2word_list" BlueCross_1;
+600 xkq 1 "xkq_1word_list" cane 2 "Cane_1word_list" RedCane_2;
+400 plane 4 "Plane_2word_list" key 8 "Key_2word_list" BlueHouse_1;
+400 house 4 "House_2word_list" flag 8 "Flag_2word_list" PinkKey_1;
+500 rjdnv 1 "rjdnv_1word_list" bone 2 "Bone_1word_list" BlackTree_1;
+400 qxsw 1 "qxsw_1word_list" hand 2 "Hand_1word_list" BlueHand_3;
+200 lamp 4 "Lamp_2word_list" tree 8 "Tree_2word_list" GreenLamp_1;
+400 xkq 1 "xkq_1word_list" plane 2 "Plane_1word_list" RedPlane_2;
+200 plane 4 "Plane_2word_list" bow 8 "Bow_2word_list" RedPlane_1;
+300 mtpv 1 "mtpv_1word_list" bell 2 "Bell_1word_list" PinkBone_2;
+200 qxsw 1 "qxsw_1word_list" car 2 "Car_1word_list" BlueHouse_3;
+400 house 4 "House_2word_list" bone 8 "Bone_2word_list" BlackBone_1;
+500 lamp 4 "Lamp_2word_list" cross 8 "Cross_2word_list" PinkLock_1;
+500 mtpv 1 "mtpv_1word_list" cane 2 "Cane_1word_list" PinkCane_2;
+300 cross 4 "Cross_2word_list" shoe 8 "Shoe_2word_list" BlackShoe_2;
+200 cross 4 "Cross_2word_list" bell 8 "Bell_2word_list" RedBell_1;
+500 qxsw 1 "qxsw_1word_list" cup 2 "Cup_1word_list" BlueCup_2;
+400 wvcnz 1 "wvcnz_1word_list" hand 2 "Hand_1word_list" GreenStar_2;
+300 plane 4 "Plane_2word_list" bone 8 "Bone_2word_list" RedBow_2;
+200 mtpv 1 "mtpv_1word_list" note 2 "Note_1word_list" PinkNote_1;
+500 qxsw 1 "qxsw_1word_list" leaf 2 "Leaf_1word_list" BlueLeaf_1;
+600 cross 4 "Cross_2word_list" house 8 "House_2word_list" PinkCross_1;
+600 cup 4 "Cup_2word_list" boat 8 "Boat_2word_list" BrownKey_1;
+600 boat 4 "Boat_2word_list" car 8 "Car_2word_list" GreenKey_1;
+600 xkq 1 "xkq_1word_list" lock 2 "Lock_1word_list" RedLock_3;
+200 wvcnz 1 "wvcnz_1word_list" car 2 "Car_1word_list" GreenStar_3;
+600 house 4 "House_2word_list" hand 8 "Hand_2word_list" BlackBag_1;
+500 wvcnz 1 "wvcnz_1word_list" house 2 "House_1word_list" GreenHouse_3;
+};
+
+#### Composition BLOCK 3 ####
+
+trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
+# block 1 begin #
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+300 brown 64 "Brown_2word_comp" bell 128 "Bell_2word_comp" BrownShoe_2;
+300 zbxlv 16 "zbxlv_1word_comp" shoe 32 "Shoe_1word_comp" BrownShoe_2;
+600 black 64 "Black_2word_comp" key 128 "Key_2word_comp" BlackStar_1;
+500 zbxlv 16 "zbxlv_1word_comp" boat 32 "Boat_1word_comp" BrownBoat_2;
+400 green 64 "Green_2word_comp" hand 128 "Hand_2word_comp" GreenCup_2;
+600 green 64 "Green_2word_comp" house 128 "House_2word_comp" PinkHouse_3;
+500 brown 64 "Brown_2word_comp" tree 128 "Tree_2word_comp" BrownTree_1;
+200 qxsw 16 "qxsw_1word_comp" cup 32 "Cup_1word_comp" BlueNote_2;
+500 blue 64 "Blue_2word_comp" cross 128 "Cross_2word_comp" BlueLeaf_3;
+300 xkq 16 "xkq_1word_comp" boat 32 "Boat_1word_comp" RedCane_1;
+200 qxsw 16 "qxsw_1word_comp" note 32 "Note_1word_comp" BluePlane_3;
+200 brown 64 "Brown_2word_comp" flag 128 "Flag_2word_comp" BlackFlag_3;
+300 pink 64 "Pink_2word_comp" house 128 "House_2word_comp" PinkBoat_3;
+600 brown 64 "Brown_2word_comp" lamp 128 "Lamp_2word_comp" BrownLamp_2;
+200 xkq 16 "xkq_1word_comp" cane 32 "Cane_1word_comp" RedCane_1;
+600 pink 64 "Pink_2word_comp" bell 128 "Bell_2word_comp" RedBell_3;
+200 xkq 16 "xkq_1word_comp" bell 32 "Bell_1word_comp" RedBell_3;
+300 black 64 "Black_2word_comp" hand 128 "Hand_2word_comp" BlackHand_2;
+300 red 64 "Red_2word_comp" note 128 "Note_2word_comp" RedPlane_1;
+300 rjdnv 16 "rjdnv_1word_comp" bag 32 "Bag_1word_comp" BlackHeart_1;
+400 zbxlv 16 "zbxlv_1word_comp" plane 32 "Plane_1word_comp" BrownShoe_2;
+400 black 64 "Black_2word_comp" tree 128 "Tree_2word_comp" PinkTree_3;
+500 green 64 "Green_2word_comp" leaf 128 "Leaf_2word_comp" GreenLeaf_1;
+300 xkq 16 "xkq_1word_comp" car 32 "Car_1word_comp" RedCar_1;
+200 wvcnz 16 "wvcnz_1word_comp" bow 32 "Bow_1word_comp" GreenStar_2;
+600 green 64 "Green_2word_comp" key 128 "Key_2word_comp" GreenKey_2;
+500 black 64 "Black_2word_comp" flag 128 "Flag_2word_comp" BlackFlag_2;
+500 zbxlv 16 "zbxlv_1word_comp" square 32 "Square_1word_comp" BrownTree_1;
+400 zbxlv 16 "zbxlv_1word_comp" tree 32 "Tree_1word_comp" BrownTree_3;
+500 wvcnz 16 "wvcnz_1word_comp" star 32 "Star_1word_comp" GreenStar_3;
+600 red 64 "Red_2word_comp" lock 128 "Lock_2word_comp" RedLock_2;
+400 mtpv 16 "mtpv_1word_comp" heart 32 "Heart_1word_comp" PinkHeart_1;
+400 wvcnz 16 "wvcnz_1word_comp" cane 32 "Cane_1word_comp" GreenHand_3;
+200 brown 64 "Brown_2word_comp" bag 128 "Bag_2word_comp" BrownBag_2;
+300 xkq 16 "xkq_1word_comp" lock 32 "Lock_1word_comp" RedLock_1;
+600 wvcnz 16 "wvcnz_1word_comp" house 32 "House_1word_comp" GreenHouse_2;
+200 xkq 16 "xkq_1word_comp" heart 32 "Heart_1word_comp" RedBoat_1;
+600 black 64 "Black_2word_comp" cross 128 "Cross_2word_comp" BlackCross_1;
+600 zbxlv 16 "zbxlv_1word_comp" car 32 "Car_1word_comp" BrownCar_2;
+200 pink 64 "Pink_2word_comp" cross 128 "Cross_2word_comp" BlueCross_3;
+300 black 64 "Black_2word_comp" cross 128 "Cross_2word_comp" BlackCross_1;
+400 wvcnz 16 "wvcnz_1word_comp" cup 32 "Cup_1word_comp" GreenLamp_3;
+200 mtpv 16 "mtpv_1word_comp" square 32 "Square_1word_comp" PinkSquare_3;
+400 black 64 "Black_2word_comp" fork 128 "Fork_2word_comp" BlackFork_1;
+500 rjdnv 16 "rjdnv_1word_comp" cross 32 "Cross_1word_comp" BlackCross_3;
+400 rjdnv 16 "rjdnv_1word_comp" bone 32 "Bone_1word_comp" BlackFlag_2;
+600 qxsw 16 "qxsw_1word_comp" flag 32 "Flag_1word_comp" BlueFlag_3;
+500 brown 64 "Brown_2word_comp" square 128 "Square_2word_comp" BrownKey_1;
+400 green 64 "Green_2word_comp" cup 128 "Cup_2word_comp" BlueCup_2;
+500 red 64 "Red_2word_comp" plane 128 "Plane_2word_comp" RedPlane_2;
+};
+
+#### List BLOCK 4 ####
+
+trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_break; code ="list_break";};
+# block 1 begin #
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+400 xkq 1 "xkq_1word_list" disc 2 "Disc_1word_list" RedDisc_1;
+400 xkq 1 "xkq_1word_list" star 2 "Star_1word_list" RedLock_3;
+200 xkq 1 "xkq_1word_list" note 2 "Note_1word_list" RedCane_3;
+600 cup 4 "Cup_2word_list" heart 8 "Heart_2word_list" BlackCup_1;
+300 xkq 1 "xkq_1word_list" fork 2 "Fork_1word_list" RedBell_3;
+200 mtpv 1 "mtpv_1word_list" bone 2 "Bone_1word_list" PinkBone_2;
+300 house 4 "House_2word_list" square 8 "Square_2word_list" GreenHouse_3;
+600 zbxlv 1 "zbxlv_1word_list" bell 2 "Bell_1word_list" BrownBag_3;
+300 lamp 4 "Lamp_2word_list" heart 8 "Heart_2word_list" RedHeart_1;
+200 mtpv 1 "mtpv_1word_list" house 2 "House_1word_list" PinkBone_1;
+200 mtpv 1 "mtpv_1word_list" square 2 "Square_1word_list" PinkSquare_2;
+200 lamp 4 "Lamp_2word_list" note 8 "Note_2word_list" BrownLamp_2;
+200 boat 4 "Boat_2word_list" bag 8 "Bag_2word_list" BlackBag_1;
+400 cup 4 "Cup_2word_list" note 8 "Note_2word_list" BlackBone_3;
+400 qxsw 1 "qxsw_1word_list" disc 2 "Disc_1word_list" BlueDisc_1;
+500 zbxlv 1 "zbxlv_1word_list" note 2 "Note_1word_list" BrownNote_2;
+300 cross 4 "Cross_2word_list" leaf 8 "Leaf_2word_list" BlueCross_3;
+500 rjdnv 1 "rjdnv_1word_list" star 2 "Star_1word_list" BlackStar_3;
+400 cup 4 "Cup_2word_list" star 8 "Star_2word_list" BlackBone_3;
+600 qxsw 1 "qxsw_1word_list" bag 2 "Bag_1word_list" BlueBag_2;
+400 cross 4 "Cross_2word_list" house 8 "House_2word_list" BlackCup_2;
+600 qxsw 1 "qxsw_1word_list" heart 2 "Heart_1word_list" BlueHeart_1;
+500 plane 4 "Plane_2word_list" tree 8 "Tree_2word_list" GreenHouse_3;
+500 wvcnz 1 "wvcnz_1word_list" fork 2 "Fork_1word_list" GreenShoe_3;
+500 house 4 "House_2word_list" lamp 8 "Lamp_2word_list" GreenLamp_2;
+600 mtpv 1 "mtpv_1word_list" boat 2 "Boat_1word_list" PinkCross_3;
+400 qxsw 1 "qxsw_1word_list" lock 2 "Lock_1word_list" BlueHand_1;
+300 xkq 1 "xkq_1word_list" boat 2 "Boat_1word_list" RedNote_2;
+300 lamp 4 "Lamp_2word_list" bone 8 "Bone_2word_list" BrownLamp_3;
+600 house 4 "House_2word_list" lamp 8 "Lamp_2word_list" RedStar_3;
+300 plane 4 "Plane_2word_list" hand 8 "Hand_2word_list" BrownHand_2;
+500 mtpv 1 "mtpv_1word_list" leaf 2 "Leaf_1word_list" PinkTree_3;
+300 cup 4 "Cup_2word_list" car 8 "Car_2word_list" BlueCar_2;
+300 rjdnv 1 "rjdnv_1word_list" bow 2 "Bow_1word_list" BlackBow_2;
+600 rjdnv 1 "rjdnv_1word_list" cup 2 "Cup_1word_list" BlackCup_2;
+400 cross 4 "Cross_2word_list" car 8 "Car_2word_list" RedPlane_2;
+600 house 4 "House_2word_list" flag 8 "Flag_2word_list" BlueLamp_2;
+600 plane 4 "Plane_2word_list" tree 8 "Tree_2word_list" PinkHouse_1;
+400 zbxlv 1 "zbxlv_1word_list" shoe 2 "Shoe_1word_list" BrownShoe_3;
+500 rjdnv 1 "rjdnv_1word_list" flag 2 "Flag_1word_list" BlackFlag_1;
+200 house 4 "House_2word_list" boat 8 "Boat_2word_list" GreenHouse_3;
+500 wvcnz 1 "wvcnz_1word_list" shoe 2 "Shoe_1word_list" GreenShoe_2;
+400 plane 4 "Plane_2word_list" star 8 "Star_2word_list" RedPlane_2;
+200 lamp 4 "Lamp_2word_list" fork 8 "Fork_2word_list" PinkFork_3;
+200 house 4 "House_2word_list" key 8 "Key_2word_list" BrownPlane_2;
+300 xkq 1 "xkq_1word_list" star 2 "Star_1word_list" RedBow_3;
+600 house 4 "House_2word_list" bag 8 "Bag_2word_list" BlueHouse_3;
+500 plane 4 "Plane_2word_list" cross 8 "Cross_2word_list" BlackCross_2;
+500 lamp 4 "Lamp_2word_list" leaf 8 "Leaf_2word_list" GreenBell_2;
+200 qxsw 1 "qxsw_1word_list" house 2 "House_1word_list" BlueHouse_2;
+};
+#### Composition BLOCK 4 ####
+
+trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
+# block 1 begin #
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+400 zbxlv 16 "zbxlv_1word_comp" flag 32 "Flag_1word_comp" BrownLamp_1;
+300 green 64 "Green_2word_comp" bow 128 "Bow_2word_comp" RedBow_2;
+600 black 64 "Black_2word_comp" bow 128 "Bow_2word_comp" BlackBow_2;
+500 xkq 16 "xkq_1word_comp" plane 32 "Plane_1word_comp" RedPlane_2;
+400 blue 64 "Blue_2word_comp" leaf 128 "Leaf_2word_comp" BlueLeaf_2;
+400 green 64 "Green_2word_comp" shoe 128 "Shoe_2word_comp" GreenShoe_3;
+300 wvcnz 16 "wvcnz_1word_comp" shoe 32 "Shoe_1word_comp" GreenShoe_3;
+600 blue 64 "Blue_2word_comp" bag 128 "Bag_2word_comp" BlueBag_2;
+400 red 64 "Red_2word_comp" disc 128 "Disc_2word_comp" RedDisc_2;
+400 red 64 "Red_2word_comp" car 128 "Car_2word_comp" RedCar_2;
+200 qxsw 16 "qxsw_1word_comp" disc 32 "Disc_1word_comp" BlueDisc_2;
+500 rjdnv 16 "rjdnv_1word_comp" hand 32 "Hand_1word_comp" BlackHand_3;
+500 brown 64 "Brown_2word_comp" boat 128 "Boat_2word_comp" BrownBoat_3;
+300 mtpv 16 "mtpv_1word_comp" leaf 32 "Leaf_1word_comp" PinkTree_3;
+500 wvcnz 16 "wvcnz_1word_comp" key 32 "Key_1word_comp" GreenKey_3;
+600 zbxlv 16 "zbxlv_1word_comp" lamp 32 "Lamp_1word_comp" BrownKey_1;
+600 red 64 "Red_2word_comp" lock 128 "Lock_2word_comp" RedLock_2;
+600 zbxlv 16 "zbxlv_1word_comp" square 32 "Square_1word_comp" BrownSquare_3;
+200 wvcnz 16 "wvcnz_1word_comp" car 32 "Car_1word_comp" GreenBell_1;
+500 brown 64 "Brown_2word_comp" shoe 128 "Shoe_2word_comp" BrownShoe_1;
+400 rjdnv 16 "rjdnv_1word_comp" bow 32 "Bow_1word_comp" BlackBow_1;
+200 qxsw 16 "qxsw_1word_comp" car 32 "Car_1word_comp" BlueNote_3;
+300 brown 64 "Brown_2word_comp" square 128 "Square_2word_comp" BrownSquare_3;
+300 black 64 "Black_2word_comp" shoe 128 "Shoe_2word_comp" PinkShoe_1;
+200 zbxlv 16 "zbxlv_1word_comp" lamp 32 "Lamp_1word_comp" BrownLamp_3;
+600 qxsw 16 "qxsw_1word_comp" square 32 "Square_1word_comp" BlueCar_3;
+200 xkq 16 "xkq_1word_comp" bow 32 "Bow_1word_comp" RedCane_3;
+400 green 64 "Green_2word_comp" lamp 128 "Lamp_2word_comp" GreenLamp_2;
+500 pink 64 "Pink_2word_comp" fork 128 "Fork_2word_comp" PinkFork_1;
+300 red 64 "Red_2word_comp" boat 128 "Boat_2word_comp" PinkBoat_2;
+600 zbxlv 16 "zbxlv_1word_comp" bag 32 "Bag_1word_comp" BrownBag_2;
+500 xkq 16 "xkq_1word_comp" star 32 "Star_1word_comp" RedPlane_3;
+200 blue 64 "Blue_2word_comp" house 128 "House_2word_comp" BlueHouse_2;
+300 mtpv 16 "mtpv_1word_comp" key 32 "Key_1word_comp" PinkKey_3;
+400 qxsw 16 "qxsw_1word_comp" lamp 32 "Lamp_1word_comp" BlueHeart_3;
+300 brown 64 "Brown_2word_comp" boat 128 "Boat_2word_comp" BrownBoat_1;
+500 wvcnz 16 "wvcnz_1word_comp" hand 32 "Hand_1word_comp" GreenHouse_3;
+600 brown 64 "Brown_2word_comp" cane 128 "Cane_2word_comp" GreenCane_2;
+200 wvcnz 16 "wvcnz_1word_comp" bow 32 "Bow_1word_comp" GreenBow_3;
+400 black 64 "Black_2word_comp" bone 128 "Bone_2word_comp" BlackKey_2;
+200 rjdnv 16 "rjdnv_1word_comp" tree 32 "Tree_1word_comp" BlackBone_3;
+600 black 64 "Black_2word_comp" tree 128 "Tree_2word_comp" BlackFlag_3;
+200 pink 64 "Pink_2word_comp" heart 128 "Heart_2word_comp" PinkHeart_2;
+400 blue 64 "Blue_2word_comp" cup 128 "Cup_2word_comp" BlueCar_2;
+500 mtpv 16 "mtpv_1word_comp" bell 32 "Bell_1word_comp" PinkTree_2;
+200 zbxlv 16 "zbxlv_1word_comp" bone 32 "Bone_1word_comp" BrownBone_3;
+500 mtpv 16 "mtpv_1word_comp" cross 32 "Cross_1word_comp" PinkSquare_1;
+300 green 64 "Green_2word_comp" cane 128 "Cane_2word_comp" GreenBell_2;
+300 blue 64 "Blue_2word_comp" heart 128 "Heart_2word_comp" BlueHeart_2;
+600 green 64 "Green_2word_comp" disc 128 "Disc_2word_comp" GreenHand_3;
+};
+
+######### End Experimental Items #############
+
+trial {
+   trial_type = specific_response;
+	terminator_button = 1;
+   trial_duration = forever;
+
+   picture theEnd_pic;
+	code ="the_end_screen";
+};
