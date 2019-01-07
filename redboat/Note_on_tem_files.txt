@@ -1,0 +1,1 @@
+For some versions of Presentation, the MainTrail and PracticeTrial.tem files may need to be kept in the /ScenarioFiles folder. There are redundant copies there now.
