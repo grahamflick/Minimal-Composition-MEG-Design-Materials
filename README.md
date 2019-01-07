@@ -65,7 +65,7 @@ Image: Until subject response
 # Trigger scheme for MEG:
 2 triggers are sent on each trial, one for each item. A photodiode is presented in the top left corner to account for delays in post-processing.
 
-List, on 1st item, non-word: 1
+List, on 1st item, non-word: 1 \n
 List, on 2nd item, after a non-word: 2
 List, on 1st item, word: 4
 List, on 2nd item, after a word: 8
