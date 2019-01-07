@@ -23,7 +23,7 @@ begin;
 # Lines 150-650 define all of the experimental stimuli.
 # The main experimental blocks begin around line 715. This scenario contains fillable
 # Template blocks. See the accompanying python scripts for details on how these are filled.
-# For timing parameters, see the Template File "MainTrial_Phrase.tem".
+# For timing parameters, see the Template File "MainTrial.tem".
 
 #              ###                                               ###
 #              ########### BEGIN OBJECT DEFINITIONS ################
@@ -62,13 +62,13 @@ picture {background_color = 128,128,128; text instruct2; x = 0; y = 100;} instru
 text {caption = "There will be 2 types of Blocks."; font_size = 14;} instruct3;
 picture {background_color = 128,128,128; text instruct3; x = 0; y = 100;} instruct3_pic;
 
-text{caption = "In LIST blocks, you will see either a list of words (CUP, BOAT) or
+text{caption = "In LIST blocks, you will see either a list of words (CUP, BOAT),
 
-string of random letters and then a word (xwk BOAT).
+or a non-word and a word (xwk BOAT).
 
-If you see the list, please judge whether either word matches the picture.
+If the picture matches ANY of the words, press the LEFT button.
 
-If you see a non-word and then a word, please judge if the one word is in picture."; font_size = 14;} instruct4;
+If the picture does not match any of the words, press the RIGHT button."; font_size = 14;} instruct4;
 picture {background_color = 128,128,128; text instruct4; x = 0; y = 100;} instruct4_pic;
 
 ########## Phrase blocks
@@ -76,9 +76,9 @@ text { caption = "In PHRASE blocks, you will see either a phrase (RED BOAT), or
 
 a non-word and then a word (xwk BOAT).
 
-If you see the phrase, please judge whether the phrase matches the picture.
+If the picture matches ALL of the words, press the LEFT button.
 
-If you see a non-word and then a word, please judge if the one word is in picture."; font_size = 14;} instruct5;
+If the pictures does not match all of the words, press the RIGHT button."; font_size = 14;} instruct5;
 picture {background_color = 128,128,128; text instruct5; x = 0; y = 100;} instruct5_pic;
 
 ################################################################################
@@ -92,7 +92,11 @@ picture {background_color = 128,128,128; text instruct6; x = 0; y = 100;} instru
 ################################################################################
 
 ######### START OF PRACTICE
-text { caption = "We will now do some practice trials! Please press the left button to begin."; font_size = 14; } instruct7;
+text { caption = "We will now do some practice trials!
+
+After each trial, the correct answer for that item will appear on the screen!
+
+Please press the left button to begin."; font_size = 14; } instruct7;
 picture {background_color = 128,128,128; text instruct6; x = 0; y = 100;} instruct7_pic;
 
 ######### END OF PRACTICE
@@ -104,15 +108,16 @@ picture {background_color = 128,128,128; text end_practice; x = 0; y = 100;} end
 
 picture {text { caption = "This is a LIST block.
 
-If two words appear, please judge whether either word matches the picture.
+If the picture matches ANY of the words, press the LEFT button.
 
-If a non-word and word pair appears, please judge if the one word is in picture."; font_size=30;}; x=0; y = 100;} list_block;
+If the picture does not match any of the words, press the RIGHT button."; font_size=14;}; x=0; y = 100;} list_block;
 
 picture {text { caption = "This is a PHRASE block.
 
-If two words appear, please judge whether the phrase matches the picture.
+If the picture matches ALL of the words, press the LEFT button.
 
-If a non-word and word pair appears, please judge if the one word is in the picture."; font_size=30;}; x=0; y = 100;} phrase_block;
+If the picture does not match all of the words, press the RIGHT button."; font_size=14;}; x=0; y = 100;} phrase_block;
+
 
 
 
@@ -196,6 +201,9 @@ picture { text {caption = "shoe"; font_size=26;}; x = 0; y = 0; bitmap diode;x =
 picture { text {caption = "square"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} square;
 picture { text {caption = "star"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} star;
 picture { text {caption = "tree"; font_size=26;}; x = 0; y = 0; bitmap diode;x =750; y=550;} tree;
+
+picture { text {caption = "Match!"; font_size = 36;}; x= 0; y = 0;} Match;
+picture { text {caption = "No Match!"; font_size = 36;}; x= 0; y = 0;} NoMatch;
 
 ############################### NOW THE IMAGES #################################
 bitmap {filename="Stim/BlackBag_1.jpg" ; height = 300; width = 250; } BlackBag_1 ;
@@ -683,34 +691,34 @@ trial {trial_type = specific_response; terminator_button = 1;trial_duration = fo
 ################### BEGIN THE PRACTICE TRIALS #######################
 #####################################################################
 
-trial	{trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_block;};
-TEMPLATE "PracticeTrial.tem" randomize {
-jitter word1	word2	picture1;
-400 xkq lamp  PinkLamp_2;
-300 wvcnz disc  BlackCross_1;
-500 mtpv  key RedKey_1;
-200 qxsq  boat  BrownFlag_1;
-600 zbxlv note  BlueNote_1;
-400 cross tree  RedCar_1;
-300 house shoe  BlueHouse_2;
-500 plane hand  GreenLamp_1;
-600 cup lock  BlackLock_3;
-200 lamp  heart BrownPlane_2;
-};
-
 trial	{trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_block;};
 TEMPLATE "PracticeTrial.tem" randomize {
-jitter word1	word2	picture1;
-400 xkq lamp  PinkLamp_2;
-300 wvcnz disc  BlackCross_1;
-500 mtpv  key RedKey_1;
-200 qxsq  boat  BrownFlag_3;
-600 zbxlv note  BlueNote_1;
-400 brown tree  RedCar_2;
-300 blue  shoe  BlueShoe_2;
-500 pink  hand  GreenLamp_3;
-600 black lock  BlackLock_3;
-200 green heart BrownPlane_1;
+jitter word1	word2	picture1	cor;
+400 xkq lamp  PinkLamp_2	Match;
+300 wvcnz disc  BlackCross_1	NoMatch;
+500 mtpv  key RedKey_1	Match;
+200 qxsw  boat  BrownFlag_3	NoMatch;
+600 zbxlv note  BlueNote_1	Match;
+400 brown tree  RedCar_2	NoMatch;
+300 blue  shoe  BlueShoe_2	Match;
+500 pink  hand  GreenLamp_3	NoMatch;
+600 black lock  BlackLock_3	Match;
+200 green heart BrownPlane_1	NoMatch;
+};
+
+trial	{trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_block;};
+TEMPLATE "PracticeTrial.tem" randomize {
+jitter word1	word2	picture1	cor;
+400 xkq lamp  PinkLamp_2 Match;
+300 wvcnz disc  BlackCross_1	NoMatch;
+500 mtpv  key RedKey_1	Match;
+200 qxsw  boat  BrownFlag_1	NoMatch;
+600 zbxlv note  BlueNote_1	Match;
+400 cross tree  RedCar_1	NoMatch;
+300 house shoe  BlueHouse_2	Match;
+500 plane hand  GreenLamp_1	NoMatch;
+600 cup lock  BlackLock_3	Match;
+200 lamp  heart BrownPlane_2	NoMatch;
 };
 
 # End of the practice
@@ -723,461 +731,461 @@ trial {trial_type = specific_response; terminator_button =1; trial_duration = fo
 #### List BLOCK 1 ####
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture firstblock; code ="first_block";};
 # block 1 begin #
-TEMPLATE "MainTrial_Phrase.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
-start_here fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+start_here fill	fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
 };
 
 #### Phrase BLOCK 1 ####
 
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
 # block 1 begin #
-TEMPLATE "MainTrial_Phrase.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
-start_here fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+start_here fill	fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
 };
 
 #### LIST BLOCK 2 ####
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_break; code ="list_break";};
 # block 1 begin #
-TEMPLATE "MainTrial_Phrase.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
-start_here fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+start_here fill	fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
 };
 
 #### Composition BLOCK 2 ####
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
 # block 1 begin #
-TEMPLATE "MainTrial_Phrase.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
-start_here fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+start_here fill	fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
 };
 
 #### List BLOCK 3 ####
 
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_break; code ="list_break";};
 # block 1 begin #
-TEMPLATE "MainTrial_Phrase.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
-start_here fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+start_here fill	fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
 };
 
 #### Composition BLOCK 3 ####
 
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
 # block 1 begin #
-TEMPLATE "MainTrial_Phrase.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
-start_here fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+start_here fill	fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
 };
 
 #### List BLOCK 4 ####
 
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_break; code ="list_break";};
 # block 1 begin #
-TEMPLATE "MainTrial_Phrase.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
-start_here fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+start_here fill	fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
 };
 #### Composition BLOCK 4 ####
 
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
 # block 1 begin #
-TEMPLATE "MainTrial_Phrase.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
-start_here fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
-fill fill fill fill fill fill;
+TEMPLATE "MainTrial.tem" {
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
+start_here fill	fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
+fill fill fill fill fill fill fill fill;
 };
 
 ######### End Experimental Items #############
