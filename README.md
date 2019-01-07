@@ -56,7 +56,7 @@ ISI: 300 ms
 
 Word 2: 300 ms
 
-ISI: 300 ms
+ISI: 600 ms
 
 Image: Until subject response
 
