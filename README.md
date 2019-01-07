@@ -61,3 +61,16 @@ Word 2: 300 ms
 ISI: 300 ms
 
 Image: Until subject response
+
+# Trigger scheme for MEG:
+2 triggers are sent on each trial, one for each item. A photodiode is presented in the top left corner to account for delays in post-processing.
+
+List, on 1st item, non-word: 1
+List, on 2nd item, after a non-word: 2
+List, on 1st item, word: 4
+List, on 2nd item, after a word: 8
+
+Phrase, on 1st item, non-word: 16
+Phrase, on 2nd item, after a non-word: 32
+Phrase, on 1st item, word: 64
+Phrase, on 2nd item, after a word: 128 
