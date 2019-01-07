@@ -97,7 +97,7 @@ text { caption = "We will now do some practice trials!
 After each trial, the correct answer for that item will appear on the screen!
 
 Please press the left button to begin."; font_size = 14; } instruct7;
-picture {background_color = 128,128,128; text instruct6; x = 0; y = 100;} instruct7_pic;
+picture {background_color = 128,128,128; text instruct7; x = 0; y = 100;} instruct7_pic;
 
 ######### END OF PRACTICE
 text { caption = "That's the end of the practice! Please let the experimenter know if you have any questions!"; font_size = 14; } end_practice;

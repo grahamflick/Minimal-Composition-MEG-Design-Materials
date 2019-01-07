@@ -97,7 +97,7 @@ text { caption = "We will now do some practice trials!
 After each trial, the correct answer for that item will appear on the screen!
 
 Please press the left button to begin."; font_size = 14; } instruct7;
-picture {background_color = 128,128,128; text instruct6; x = 0; y = 100;} instruct7_pic;
+picture {background_color = 128,128,128; text instruct7; x = 0; y = 100;} instruct7_pic;
 
 ######### END OF PRACTICE
 text { caption = "That's the end of the practice! Please let the experimenter know if you have any questions!"; font_size = 14; } end_practice;
@@ -793,7 +793,7 @@ fill fill fill fill fill fill fill fill;
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_break; code ="list_break";};
 # block 1 begin #
 TEMPLATE "MainTrial.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
 start_here fill	fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
@@ -851,7 +851,7 @@ fill fill fill fill fill fill fill fill;
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
 # block 1 begin #
 TEMPLATE "MainTrial.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
 start_here fill	fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
@@ -909,7 +909,7 @@ fill fill fill fill fill fill fill fill;
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_break; code ="list_break";};
 # block 1 begin #
 TEMPLATE "MainTrial.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
 start_here fill	fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
@@ -967,7 +967,7 @@ fill fill fill fill fill fill fill fill;
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
 # block 1 begin #
 TEMPLATE "MainTrial.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
 start_here fill	fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
@@ -1025,7 +1025,7 @@ fill fill fill fill fill fill fill fill;
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_break; code ="list_break";};
 # block 1 begin #
 TEMPLATE "MainTrial.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
 start_here fill	fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
@@ -1083,7 +1083,7 @@ fill fill fill fill fill fill fill fill;
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture phrase_break; code ="phrase_break";};
 # block 1 begin #
 TEMPLATE "MainTrial.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
 start_here fill	fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
@@ -1140,7 +1140,7 @@ fill fill fill fill fill fill fill fill;
 trial { trial_type = specific_response; terminator_button = 1; trial_duration = forever; picture list_break; code ="list_break";};
 # block 1 begin #
 TEMPLATE "MainTrial.tem" {
-jitter word1	Port_Code1 word2 Port_Code2 picture1;
+jitter word1	Port_Code1	code1 word2 Port_Code2	code2 picture1;
 start_here fill	fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
 fill fill fill fill fill fill fill fill;
