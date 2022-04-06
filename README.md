@@ -16,7 +16,7 @@ In "List" or "non-composition" blocks, subjects read either a list of two nouns 
 
 # Experimental materials
 
-25 critical head nouns (bad, bell, boat, bone, bow, cane, car, cross, cup, disc, flag, fork, hand, heart, house, key, lamp, leaf, lock, note, plane, shoe, square, star, tree).
+25 critical head nouns (bag, bell, boat, bone, bow, cane, car, cross, cup, disc, flag, fork, hand, heart, house, key, lamp, leaf, lock, note, plane, shoe, square, star, tree).
 
 6 color adjectives (red, blue, pink, black, green, brown)
 
